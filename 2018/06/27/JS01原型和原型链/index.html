@@ -7,17 +7,20 @@
   
   <title>JS01原型和原型链 | 李克兢</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="JavaScript">
+  <meta name="description" content="#三个关系 1234function Ninja() &amp;#123;&amp;#125;console.log(Ninja) //[Function: Ninja]console.log(Ninja.prototype)   //Ninja &amp;#123;&amp;#125; 方法具有prototype属性，方法的prototype属性是一个对象 1234567var ninja = new Ninja()conso">
+<meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS01原型和原型链">
 <meta property="og:url" content="http://yoursite.com/2018/06/27/JS01原型和原型链/index.html">
 <meta property="og:site_name" content="李克兢">
+<meta property="og:description" content="#三个关系 1234function Ninja() &amp;#123;&amp;#125;console.log(Ninja) //[Function: Ninja]console.log(Ninja.prototype)   //Ninja &amp;#123;&amp;#125; 方法具有prototype属性，方法的prototype属性是一个对象 1234567var ninja = new Ninja()conso">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/06/27/JS01原型和原型链/proto01.png">
-<meta property="og:updated_time" content="2018-06-27T06:44:06.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/27/JS01原型和原型链/proto01.jpg">
+<meta property="og:updated_time" content="2018-06-27T07:45:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS01原型和原型链">
-<meta name="twitter:image" content="http://yoursite.com/2018/06/27/JS01原型和原型链/proto01.png">
+<meta name="twitter:description" content="#三个关系 1234function Ninja() &amp;#123;&amp;#125;console.log(Ninja) //[Function: Ninja]console.log(Ninja.prototype)   //Ninja &amp;#123;&amp;#125; 方法具有prototype属性，方法的prototype属性是一个对象 1234567var ninja = new Ninja()conso">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/27/JS01原型和原型链/proto01.jpg">
   
     <link rel="alternate" href="/atom.xml" title="李克兢" type="application/atom+xml">
   
@@ -86,12 +89,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="proto01.png" alt=""></p>
+        <p>#三个关系</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Ninja) <span class="comment">//[Function: Ninja]</span></span><br><span class="line"><span class="built_in">console</span>.log(Ninja.prototype)   <span class="comment">//Ninja &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>方法具有prototype属性，方法的prototype属性是一个对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ninja = <span class="keyword">new</span> Ninja()</span><br><span class="line"><span class="built_in">console</span>.log(ninja.__proto__) <span class="comment">//Ninja &#123;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(ninja.prototype) <span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(Ninja.prototype === ninja.__proto__) <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(ninja) === Ninja.prototype)<span class="comment">//true</span></span><br><span class="line"><span class="comment">//Object.setPrototypeOf(a,b)方法将 b 对象设置为 a 对象的原型</span></span><br><span class="line"><span class="built_in">console</span>.log(Ninja === Ninja.prototype.constructor) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>构造函数创建的对象(通过 new 操作符调用函数意味着作为构造器调用)具有<code>__proto__</code>属性，而且<code>Ninja.prototype</code>和<code>ninja.__proto__</code>是同一个对象</p>
+<img src="/2018/06/27/JS01原型和原型链/proto01.jpg" title="This is an example image">
+<p>#实例属性和原型属性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">Ninja.prototype.name = <span class="string">'tony'</span></span><br><span class="line"><span class="keyword">const</span> ninja = <span class="keyword">new</span> Ninja()</span><br><span class="line"><span class="built_in">console</span>.log(ninja)</span><br><span class="line">ninja.name = <span class="string">'lu'</span></span><br><span class="line"><span class="built_in">console</span>.log(ninja.name)</span><br><span class="line"><span class="keyword">delete</span> ninja.name</span><br><span class="line"><span class="built_in">console</span>.log(ninja.name)</span><br></pre></td></tr></table></figure>
+<p>当读取实例的属性时，如果找不到，就会查找与对象原型中的属性，如果还查不到，就去找原型的原型，一直找到最顶层为止。</p>
+<p>实例中可以查找到的属性就不会查找原型。</p>
+<p>实例会隐藏原型中与实例方法重名的方法。</p>
+<h1 id="并不是继承"><a href="#并不是继承" class="headerlink" title="并不是继承"></a>并不是继承</h1><blockquote>
+<p>继承意味着复制操作，然而 JavaScript 默认并不会复制对象的属性，相反，JavaScript 只是在两个对象之间创建一个关联，这样，一个对象就可以通过委托访问另一个对象的属性和函数，所以与其叫继承，委托的说法反而更准确些。</p>
+</blockquote>
+<h1 id="原型的原型"><a href="#原型的原型" class="headerlink" title="原型的原型"></a>原型的原型</h1><p>#JavaScript动态特性的副作用</p>
+<p>对象与函数原型之间引用关系是在对象创建时建立的,如果原型在代码过程中被篡改,新创建的对象将引用新的原型,原来旧的对象保持着原有的原型的引用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> log = <span class="built_in">console</span>.log.bind(<span class="keyword">this</span>)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.swung = <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> ninja1 = <span class="keyword">new</span> Ninja()</span><br><span class="line">Ninja.prototype.swingSword = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.swung</span><br><span class="line">&#125;</span><br><span class="line">log(ninja1.__proto__)<span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line">Ninja.prototype = &#123;</span><br><span class="line">    pierce : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">log(ninja1.__proto__)  <span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line"><span class="keyword">const</span> ninja2 = <span class="keyword">new</span> Ninja()</span><br><span class="line">log(ninja2.__proto__)  <span class="comment">//&#123; pierce: [Function: pierce] &#125;</span></span><br></pre></td></tr></table></figure>
+<p>#Cautions</p>
+<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><ol>
+<li><p>因为所有实例对象都可以访问 constructor 属性所以可以使用 <code>const ninja2 = new ninja1.constructor()</code>来初始化</p>
+</li>
+<li><p>instanceof 操作符的实质是:检查操作符右边的函数的原型是否存在于操作符左边的对象的原型链上</p>
+</li>
+</ol>
+<p>##还有很多细节可继续阅读《JavaScript忍者秘籍》（第二版）第七章的内容补充</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/27/JS01原型和原型链/" data-id="cjiwr97xy0000t1v0285uuive" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/27/JS01原型和原型链/" data-id="cjiwtgn7p00001zv0e28rquh9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>

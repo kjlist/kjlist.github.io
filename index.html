@@ -65,7 +65,7 @@
     <article id="post-JS01原型和原型链" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/06/27/JS01原型和原型链/" class="article-date">
-  <time datetime="2018-06-27T06:37:32.000Z" itemprop="datePublished">2018-06-27</time>
+  <time datetime="2018-06-27T08:28:37.000Z" itemprop="datePublished">2018-06-27</time>
 </a>
     
   </div>
@@ -113,10 +113,59 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/27/JS01原型和原型链/" data-id="cjiwtgn7p00001zv0e28rquh9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/27/JS01原型和原型链/" data-id="cjiww0xv10000smv0f5f3lhao" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-位操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/27/位操作/" class="article-date">
+  <time datetime="2018-06-27T08:28:37.000Z" itemprop="datePublished">2018-06-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/27/位操作/">位操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><p>异或运算又名半加运算，相同为0，不同为1。</p>
+<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><ol>
+<li>一个比特与对它取反的值做异或，结果总是1。因此a^(~a)的结果是1s（一串1）</li>
+<li>x&amp;(~0&lt;&lt;i)将x的最左边i位清零</li>
+<li>x^0s = x       x^1s = ~x </li>
+</ol>
+<p>#常见位操作</p>
+<h2 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num&amp;(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="置位"><a href="#置位" class="headerlink" title="置位"></a>置位</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> setBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num|(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="清零"><a href="#清零" class="headerlink" title="清零"></a>清零</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> clearBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num&amp;(~(<span class="number">1</span>&lt;&lt;i)))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将num最高位至i位(含)清零</span></span><br><span class="line"><span class="keyword">var</span> clearBitsMSBthoughti = <span class="function"><span class="keyword">function</span> (<span class="params">num, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num &amp; ((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将i位至0位(含)清零</span></span><br><span class="line"><span class="keyword">var</span> clearBitsIthought0 = <span class="function"><span class="keyword">function</span> (<span class="params">num, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num (~((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> updateBit = <span class="function"><span class="keyword">function</span> (<span class="params">num, i, v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> mask = ~(<span class="number">1</span> &lt;&lt; i)</span><br><span class="line">    <span class="keyword">return</span> (num &amp; mask) | (v &lt;&lt; i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/27/位操作/" data-id="cjiww0xvc0005smv07cedbzym" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li></ul>
 
     </footer>
   </div>
@@ -157,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/12/c-Learning02/" data-id="cjiwtgn8f000b1zv012wqx0ck" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/12/c-Learning02/" data-id="cjiww0xvx000jsmv00q2z1y33" class="article-share-link">Share</a>
       
       
     </footer>
@@ -193,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/01/c和指针13/" data-id="cjiwtgn8000051zv0lcbydg2i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/01/c和指针13/" data-id="cjiww0xve0008smv0f6gjzyfm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -229,7 +278,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/01/打砖块-2/" data-id="cjiwtgn8g000c1zv0aa03c0ax" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/01/打砖块-2/" data-id="cjiww0xvj000dsmv0cr6x941p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -301,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/26/c-Learning01/" data-id="cjiwtgn7y00041zv0zlbxpba3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/26/c-Learning01/" data-id="cjiww0xvb0004smv0sc1wxawa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -359,7 +408,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/08/打砖块-1/" data-id="cjiwtgn8300091zv0hhsbsdey" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/08/打砖块-1/" data-id="cjiww0xvh000bsmv0r91inqba" class="article-share-link">Share</a>
       
       
     </footer>
@@ -432,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/05/JavaScript忍者秘籍-第七章/" data-id="cjiwtgn7t00011zv051pwwldm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/05/JavaScript忍者秘籍-第七章/" data-id="cjiww0xv50001smv0ntmtjacu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li></ul>
@@ -492,7 +541,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/算法-2/" data-id="cjiwtgn8h000d1zv0shxp38sx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/算法-2/" data-id="cjiww0xvn000gsmv0auoydii7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -528,107 +577,9 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/KMP算法-1/" data-id="cjiwtgn7x00031zv0ni4l9f01" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/KMP算法-1/" data-id="cjiww0xv90003smv0g52e29h5" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-算法(1)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/03/算法(1)/" class="article-date">
-  <time datetime="2018-05-03T07:10:32.000Z" itemprop="datePublished">2018-05-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/03/算法(1)/">算法(1)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="求字符串中第一个没有重复的字符"><a href="#求字符串中第一个没有重复的字符" class="headerlink" title="求字符串中第一个没有重复的字符"></a>求字符串中第一个没有重复的字符</h2><p>###题目描述</p>
-<p>Given a string <code>s</code>, find and return the first instance of a non-repeating character in it. If there is no such character, return <code>&#39;_&#39;</code>.</p>
-<p><strong>Example</strong></p>
-<ul>
-<li><p>For <code>s = &quot;abacabad&quot;</code>, the output should be<br><code>firstNotRepeatingCharacter(s) = &#39;c&#39;</code>.</p>
-<p>There are <code>2</code> non-repeating characters in the string: <code>&#39;c&#39;</code> and <code>&#39;d&#39;</code>. Return <code>c</code> since it appears in the string first.</p>
-</li>
-<li><p>For <code>s = &quot;abacabaabacaba&quot;</code>, the output should be<br><code>firstNotRepeatingCharacter(s) = &#39;_&#39;</code>.</p>
-<p>There are no characters in this string that do not repeat.</p>
-</li>
-</ul>
-<p><strong>Input/Output</strong></p>
-<ul>
-<li><p><strong>[execution time limit] 4 seconds (js)</strong></p>
-</li>
-<li><p><strong>[input] string s</strong></p>
-<p>A string that contains only lowercase English letters.</p>
-<p><em>Guaranteed constraints:</em><br><code>1 ≤ s.length ≤ 105</code>.</p>
-</li>
-<li><p><strong>[output] char</strong></p>
-<p>The first non-repeating character in <code>s</code>, or <code>&#39;_&#39;</code> if there are no characters that do not repeat.</p>
-</li>
-</ul>
-<p>###解法</p>
-<ul>
-<li>暴力解法:</li>
-</ul>
-<p>两层循环,很低效</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">firstNotRepeatingCharacter1</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; s.length ; i++)&#123;</span><br><span class="line">        <span class="keyword">var</span> flag = <span class="literal">false</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span> ; j &lt; s.length ; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (i == j)&#123;</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (s.charAt(i) == s.charAt(j))&#123;</span><br><span class="line">                flag = <span class="literal">true</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!flag)&#123;</span><br><span class="line">            <span class="keyword">return</span> s.charAt(i)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'_'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为字母的数目是确定的,其实还可以借助哈希表来做</p>
-<ul>
-<li>简单解法:</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只需要一层循环</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">firstNotRepeatingCharacter</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; s.length ; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (s.lastIndexOf(s.charAt(i)) == s.indexOf(s.charAt(i)))&#123;</span><br><span class="line">            <span class="keyword">return</span> s.charAt(i)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'_'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>难点在于lastIndexOf和indexOf两个 API不知道,一个是求出最后一次出现的索引值, 一个是首次出现的 index, 两个 索引值相同表明该元素只出现了一次</p>
-<p>##将数组顺时针旋转90度</p>
-<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>You are given an n x n 2D matrix that represents an image. Rotate the image by 90 degrees (clockwise).</p>
-<p><strong>Example</strong></p>
-<p>For</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = [[1, 2, 3],</span><br><span class="line">     [4, 5, 6],</span><br><span class="line">     [7, 8, 9]]</span><br></pre></td></tr></table></figure>
-<p>the output should be</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rotateImage(a) =</span><br><span class="line">    [[7, 4, 1],</span><br><span class="line">     [8, 5, 2],</span><br><span class="line">     [9, 6, 3]]</span><br></pre></td></tr></table></figure>
-<p><strong>Input/Output</strong></p>
-<ul>
-<li><p><strong>[execution time limit] 4 seconds (js)</strong></p>
-</li>
-<li><p><strong>[input] array.array.integer a</strong></p>
-<p><em>Guaranteed constraints:</em><br><code>1 ≤ a.length ≤ 100</code>,<br><code>a[i].length = a.length</code>,<br><code>1 ≤ a[i][j] ≤ 104</code>.</p>
-</li>
-<li><p><strong>[output] array.array.integer</strong></p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rotateImage</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> n = a.length</span><br><span class="line">    <span class="keyword">var</span> target = []</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span> ; i&lt; n;i++)&#123;</span><br><span class="line">        <span class="keyword">var</span> row = []</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span> ; j&lt; n;j++)&#123;</span><br><span class="line">            row[j] = a[n<span class="number">-1</span>-j][i]</span><br><span class="line">        &#125;</span><br><span class="line">        target.push(row)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>仔细观察<code>row[j] = a[n-1-j][i]</code>,其实可以看成<code>row[i][j] = a[n-1-j][i]</code>,</p>
-<p>所以:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//评分最高的方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rotateImage</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Transpose</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;a.length;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>;j&lt;i;j++)&#123;</span><br><span class="line">            <span class="comment">// Switch a[i][j] and a[j][i]</span></span><br><span class="line">            <span class="comment">// With XOR swap</span></span><br><span class="line">            a[i][j] ^= a[j][i]</span><br><span class="line">            a[j][i] ^= a[i][j]</span><br><span class="line">            a[i][j] ^= a[j][i]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Reverse columns</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> a)&#123;</span><br><span class="line">        a[i] = a[i].reverse()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>值得注意的是:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a[i][j] ^= a[j][i]</span><br><span class="line">a[j][i] ^= a[i][j] </span><br><span class="line">a[i][j] ^= a[j][i]</span><br></pre></td></tr></table></figure>
-<p>不使用中间值,交换两个数的值</p>
-<p>所有不使用临时变量的思路都是让其中一个变量变成一个a和b都有关系的值这样可以先改变另一个变量值，最后改变原修改的变量值</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/算法(1)/" data-id="cjiwtgn8j000e1zv099oh4p4v" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codefights/">codefights</a></li></ul>
-
     </footer>
   </div>
   
@@ -654,7 +605,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li></ul>
     </div>
   </div>
 
@@ -664,7 +615,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a>
+      <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a>
     </div>
   </div>
 
@@ -690,6 +641,10 @@
           </li>
         
           <li>
+            <a href="/2018/06/27/位操作/">位操作</a>
+          </li>
+        
+          <li>
             <a href="/2018/06/12/c-Learning02/">c++Learning02</a>
           </li>
         
@@ -699,10 +654,6 @@
         
           <li>
             <a href="/2018/06/01/打砖块-2/">打砖块-2</a>
-          </li>
-        
-          <li>
-            <a href="/2018/05/26/c-Learning01/">c++Learning01</a>
           </li>
         
       </ul>

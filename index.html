@@ -106,10 +106,58 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/28/JS02作用域和执行上下文/" data-id="cjj5h05j50001ipv0mi2pg67w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/28/JS02作用域和执行上下文/" data-id="cjj5h5g4d0001lbv0qf2np4u9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-位操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/27/位操作/" class="article-date">
+  <time datetime="2018-06-27T08:28:37.000Z" itemprop="datePublished">2018-06-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/27/位操作/">位操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><p>异或运算又名半加运算，相同为0，不同为1。</p>
+<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><ol>
+<li>一个比特与对它取反的值做异或，结果总是1。因此a^(~a)的结果是1s（一串1）</li>
+<li>x&amp;(~0&lt;&lt;i)将x的最左边i位清零</li>
+<li>x^0s = x       x^1s = ~x </li>
+</ol>
+<p>#常见位操作</p>
+<h2 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num&amp;(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="置位"><a href="#置位" class="headerlink" title="置位"></a>置位</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> setBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num|(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="清零"><a href="#清零" class="headerlink" title="清零"></a>清零</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> clearBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num&amp;(~(<span class="number">1</span>&lt;&lt;i)))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将num最高位至i位(含)清零</span></span><br><span class="line"><span class="keyword">var</span> clearBitsMSBthoughti = <span class="function"><span class="keyword">function</span> (<span class="params">num, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num &amp; ((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将i位至0位(含)清零</span></span><br><span class="line"><span class="keyword">var</span> clearBitsIthought0 = <span class="function"><span class="keyword">function</span> (<span class="params">num, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num (~((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> updateBit = <span class="function"><span class="keyword">function</span> (<span class="params">num, i, v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> mask = ~(<span class="number">1</span> &lt;&lt; i)</span><br><span class="line">    <span class="keyword">return</span> (num &amp; mask) | (v &lt;&lt; i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/27/位操作/" data-id="cjj5h5g4n0009lbv0e4h935jo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li></ul>
 
     </footer>
   </div>
@@ -169,58 +217,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/27/JS01原型和原型链/" data-id="cjj5h05j10000ipv01j555n7y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/27/JS01原型和原型链/" data-id="cjj5h5g490000lbv0a62bs5xg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-位操作" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/27/位操作/" class="article-date">
-  <time datetime="2018-06-27T08:28:37.000Z" itemprop="datePublished">2018-06-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/27/位操作/">位操作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><p>异或运算又名半加运算，相同为0，不同为1。</p>
-<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><ol>
-<li>一个比特与对它取反的值做异或，结果总是1。因此a^(~a)的结果是1s（一串1）</li>
-<li>x&amp;(~0&lt;&lt;i)将x的最左边i位清零</li>
-<li>x^0s = x       x^1s = ~x </li>
-</ol>
-<p>#常见位操作</p>
-<h2 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num&amp;(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="置位"><a href="#置位" class="headerlink" title="置位"></a>置位</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> setBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num|(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="清零"><a href="#清零" class="headerlink" title="清零"></a>清零</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> clearBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num&amp;(~(<span class="number">1</span>&lt;&lt;i)))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将num最高位至i位(含)清零</span></span><br><span class="line"><span class="keyword">var</span> clearBitsMSBthoughti = <span class="function"><span class="keyword">function</span> (<span class="params">num, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num &amp; ((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将i位至0位(含)清零</span></span><br><span class="line"><span class="keyword">var</span> clearBitsIthought0 = <span class="function"><span class="keyword">function</span> (<span class="params">num, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num (~((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> updateBit = <span class="function"><span class="keyword">function</span> (<span class="params">num, i, v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> mask = ~(<span class="number">1</span> &lt;&lt; i)</span><br><span class="line">    <span class="keyword">return</span> (num &amp; mask) | (v &lt;&lt; i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/27/位操作/" data-id="cjj5h05jd0008ipv0n330gdf3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li></ul>
 
     </footer>
   </div>
@@ -261,7 +261,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/12/c-Learning02/" data-id="cjj5h05jz000mipv0gtej9ya2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/12/c-Learning02/" data-id="cjj5h5g52000glbv0halybi5b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -297,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/01/c和指针13/" data-id="cjj5h05ji000fipv0pdhx54ki" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/01/c和指针13/" data-id="cjj5h5g4l0008lbv03wp0kvu7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -333,7 +333,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/01/打砖块-2/" data-id="cjj5h05jg000cipv0r7zhbbab" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/01/打砖块-2/" data-id="cjj5h5g53000hlbv0a4nne28h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -405,7 +405,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/26/c-Learning01/" data-id="cjj5h05ja0005ipv07aotzneb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/26/c-Learning01/" data-id="cjj5h5g4i0005lbv0dcypuuun" class="article-share-link">Share</a>
       
       
     </footer>
@@ -476,7 +476,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/08/打砖块-1/" data-id="cjj5h05jh000dipv09ekywro1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/08/打砖块-1/" data-id="cjj5h5g57000ilbv08zqi76b0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -549,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/05/JavaScript忍者秘籍-第七章/" data-id="cjj5h05j80003ipv06fstbasn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/05/JavaScript忍者秘籍-第七章/" data-id="cjj5h5g4g0003lbv0xkkmdeb8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li></ul>
@@ -609,7 +609,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/算法-2/" data-id="cjj5h05jm000iipv0trq1rhq4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/算法-2/" data-id="cjj5h5g59000jlbv095g6om7h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -673,11 +673,11 @@
           </li>
         
           <li>
-            <a href="/2018/06/27/JS01原型和原型链/">JS01原型和原型链</a>
+            <a href="/2018/06/27/位操作/">位操作</a>
           </li>
         
           <li>
-            <a href="/2018/06/27/位操作/">位操作</a>
+            <a href="/2018/06/27/JS01原型和原型链/">JS01原型和原型链</a>
           </li>
         
           <li>

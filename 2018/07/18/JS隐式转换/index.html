@@ -5,16 +5,22 @@
   
 
   
-  <title>KMP算法-1 | 李克兢</title>
+  <title>JS隐式转换 | 李克兢</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="KMP算法-1">
-<meta property="og:url" content="http://yoursite.com/2018/05/03/KMP算法-1/index.html">
+  <meta name="description" content="1234567var log = console.log.bind(this)log([1,2,3] == &quot;1,2,3&quot;)//truelog([] == &quot;&quot;)//truelog(&quot;&quot; == &apos;&apos;)//truelog(&quot;&quot; == 0)//truelog(true == 1)//truelog(null == undefined)//true  12345678log([] == false)//">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS隐式转换">
+<meta property="og:url" content="http://yoursite.com/2018/07/18/JS隐式转换/index.html">
 <meta property="og:site_name" content="李克兢">
+<meta property="og:description" content="1234567var log = console.log.bind(this)log([1,2,3] == &quot;1,2,3&quot;)//truelog([] == &quot;&quot;)//truelog(&quot;&quot; == &apos;&apos;)//truelog(&quot;&quot; == 0)//truelog(true == 1)//truelog(null == undefined)//true  12345678log([] == false)//">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-03T07:26:54.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/18/JS隐式转换/JS隐式转换.jpg">
+<meta property="og:updated_time" content="2018-07-18T01:37:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KMP算法-1">
+<meta name="twitter:title" content="JS隐式转换">
+<meta name="twitter:description" content="1234567var log = console.log.bind(this)log([1,2,3] == &quot;1,2,3&quot;)//truelog([] == &quot;&quot;)//truelog(&quot;&quot; == &apos;&apos;)//truelog(&quot;&quot; == 0)//truelog(true == 1)//truelog(null == undefined)//true  12345678log([] == false)//">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/18/JS隐式转换/JS隐式转换.jpg">
   
     <link rel="alternate" href="/atom.xml" title="李克兢" type="application/atom+xml">
   
@@ -61,10 +67,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-KMP算法-1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-JS隐式转换" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/03/KMP算法-1/" class="article-date">
-  <time datetime="2018-05-03T07:26:54.000Z" itemprop="datePublished">2018-05-03</time>
+    <a href="/2018/07/18/JS隐式转换/" class="article-date">
+  <time datetime="2018-07-18T00:57:34.000Z" itemprop="datePublished">2018-07-18</time>
 </a>
     
   </div>
@@ -75,7 +81,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      KMP算法-1
+      JS隐式转换
     </h1>
   
 
@@ -83,32 +89,40 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var log = console.log.bind(this)</span><br><span class="line">log([1,2,3] == "1,2,3")//true</span><br><span class="line">log([] == "")//true</span><br><span class="line">log("" == '')//true</span><br><span class="line">log("" == 0)//true</span><br><span class="line">log(true == 1)//true</span><br><span class="line">log(null == undefined)//true</span><br></pre></td></tr></table></figure>
+<img src="/2018/07/18/JS隐式转换/JS隐式转换.jpg" title="This is an example image">
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">log([] == <span class="literal">false</span>)<span class="comment">//true</span></span><br><span class="line">log(![] == <span class="literal">false</span>)<span class="comment">//true</span></span><br><span class="line">log([] == <span class="literal">false</span>)<span class="comment">//true</span></span><br><span class="line">log(![] == <span class="literal">false</span>)<span class="comment">//true</span></span><br><span class="line">log(!<span class="string">''</span> == <span class="literal">true</span>)<span class="comment">//true</span></span><br><span class="line">log(!<span class="literal">NaN</span> == <span class="literal">true</span>)<span class="comment">//true</span></span><br><span class="line">log(!<span class="literal">undefined</span> == <span class="literal">true</span>)<span class="comment">//true</span></span><br><span class="line">log(!<span class="literal">null</span> == <span class="literal">true</span>)<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>![]直接转换为布尔值再取反，转换为布尔值时，<strong>空字符串(‘’),NaN,0，null,undefined</strong>这几个外返回的都是true.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log(<span class="literal">undefined</span> == <span class="literal">null</span>) <span class="comment">//true undefined和null 比较返回true，二者和其他值比较返回false</span></span><br><span class="line">log(<span class="built_in">Number</span>(<span class="literal">null</span>)) <span class="comment">//0</span></span><br><span class="line">log(<span class="built_in">Number</span>(<span class="literal">undefined</span>)) <span class="comment">//NaN</span></span><br></pre></td></tr></table></figure>
+<p>关于NaN：<a href="http://www.w3school.com.cn/js/jsref_nan_number.asp" target="_blank" rel="noopener">http://www.w3school.com.cn/js/jsref_nan_number.asp</a></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/KMP算法-1/" data-id="cjjqkanea000aitv06hqsuwpb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/18/JS隐式转换/" data-id="cjjqkane60005itv0rt74y1vx" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2018/05/03/算法-2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/07/18/Cocos2dx-JS学习01/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          算法-2
+          Cocos2dx-JS学习01
         
       </div>
     </a>
   
   
-    <a href="/2018/05/03/算法(1)/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/07/12/Cocos2d中的removeFromParent/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">算法(1)</div>
+      <div class="article-nav-title">Cocos2d中的removeFromParent</div>
     </a>
   
 </nav>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Cocos2d中的removeFromParent | 李克兢</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d中的removeFromParent">
+<meta property="og:url" content="http://yoursite.com/2018/07/12/Cocos2d中的removeFromParent/index.html">
+<meta property="og:site_name" content="李克兢">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-12T08:53:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d中的removeFromParent">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+  
+    <link rel="alternate" href="/atom.xml" title="李克兢" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李克兢</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Cocos2d中的removeFromParent" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/12/Cocos2d中的removeFromParent/" class="article-date">
+  <time datetime="2018-07-12T06:52:53.000Z" itemprop="datePublished">2018-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Cocos2d中的removeFromParent
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Node::removeFromParent()</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>-&gt;removeFromParentAndCleanup(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Node::removeFromParentAndCleanup(<span class="keyword">bool</span> cleanup)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (_parent != <span class="literal">nullptr</span>)</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        _parent-&gt;removeChild(<span class="keyword">this</span>,cleanup);</span><br><span class="line"></span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* "remove" logic MUST only be on this method</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">\* If a class want's to extend the 'removeChild' behavior it only needs</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">\* to override this method</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Node::removeChild(Node* child, <span class="keyword">bool</span> cleanup <span class="comment">/* = true */</span>)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// explicit nil handling</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (_children.empty())</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">ssize_t</span> index = _children.getIndex(child);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( index != CC_INVALID_INDEX )</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;detachChild( child, index, cleanup );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">ssize_t</span> getIndex(T object) <span class="keyword">const</span></span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">auto</span> iter = <span class="built_in">std</span>::find(_data.begin(), _data.end(), object);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (iter != _data.end())</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> iter - _data.begin();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Node::detachChild(Node *child, <span class="keyword">ssize_t</span> childIndex, <span class="keyword">bool</span> doCleanup)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// IMPORTANT:</span></span><br><span class="line">    <span class="comment">//  -1st do onExit</span></span><br><span class="line">    <span class="comment">//  -2nd cleanup</span></span><br><span class="line">    <span class="keyword">if</span> (_running)</span><br><span class="line">    &#123;</span><br><span class="line">        child-&gt;onExitTransitionDidStart();</span><br><span class="line">        child-&gt;onExit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If you don't do cleanup, the child's actions will not get removed and the</span></span><br><span class="line">    <span class="comment">// its scheduledSelectors_ dict will not get released!</span></span><br><span class="line">    <span class="keyword">if</span> (doCleanup)</span><br><span class="line">    &#123;</span><br><span class="line">        child-&gt;cleanup();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> CC_ENABLE_GC_FOR_NATIVE_OBJECTS</span></span><br><span class="line">    <span class="keyword">auto</span> sEngine = ScriptEngineManager::getInstance()-&gt;getScriptEngine();</span><br><span class="line">    <span class="keyword">if</span> (sEngine)</span><br><span class="line">    &#123;</span><br><span class="line">        sEngine-&gt;releaseScriptObject(<span class="keyword">this</span>, child);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// CC_ENABLE_GC_FOR_NATIVE_OBJECTS</span></span></span><br><span class="line">    <span class="comment">// set parent nil at the end</span></span><br><span class="line">    child-&gt;setParent(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    _children.erase(childIndex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Node* Node::getChildByName(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name) <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    CCASSERT(!name.empty(), <span class="string">"Invalid name"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">std</span>::hash&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; h;</span><br><span class="line">    <span class="keyword">size_t</span> hash = h(name);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; child : _children)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Different strings may have the same hash code, but can use it to compare first for speed</span></span><br><span class="line">        <span class="keyword">if</span>(child-&gt;_hashOfName == hash &amp;&amp; child-&gt;_name.compare(name) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> child;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要remove的时候搜索到找到在Vector&lt;Node*&gt; _children; 中的index，然后erase掉</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/12/Cocos2d中的removeFromParent/" data-id="cjjqkane40004itv0t6bblk92" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/18/JS隐式转换/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JS隐式转换
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/09/WebSocket/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">WebSocket</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/18/Cocos2dx-JS学习01/">Cocos2dx-JS学习01</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/JS隐式转换/">JS隐式转换</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/Cocos2d中的removeFromParent/">Cocos2d中的removeFromParent</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/09/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/28/JS02作用域和执行上下文/">JS02作用域和执行上下文</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 kjlist<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

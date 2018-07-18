@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Cocos2dx-JS学习01 | 李克兢</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="123456&amp;lt;body&amp;gt;&amp;lt;script src=&quot;res/loading.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;canvas id=&quot;gameCanvas&quot; width=&quot;480&quot; height=&quot;720&quot;&amp;gt;&amp;lt;/canvas&amp;gt;&amp;lt;script src=&quot;frameworks/cocos2d-html5/CCBoot.js&quot;&amp;gt;&amp;lt;/sc">
+<meta name="keywords" content="Cocos JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2dx-JS学习01">
+<meta property="og:url" content="http://yoursite.com/2018/07/18/Cocos2dx-JS学习01/index.html">
+<meta property="og:site_name" content="李克兢">
+<meta property="og:description" content="123456&amp;lt;body&amp;gt;&amp;lt;script src=&quot;res/loading.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;canvas id=&quot;gameCanvas&quot; width=&quot;480&quot; height=&quot;720&quot;&amp;gt;&amp;lt;/canvas&amp;gt;&amp;lt;script src=&quot;frameworks/cocos2d-html5/CCBoot.js&quot;&amp;gt;&amp;lt;/sc">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-18T03:19:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2dx-JS学习01">
+<meta name="twitter:description" content="123456&amp;lt;body&amp;gt;&amp;lt;script src=&quot;res/loading.js&quot;&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;canvas id=&quot;gameCanvas&quot; width=&quot;480&quot; height=&quot;720&quot;&amp;gt;&amp;lt;/canvas&amp;gt;&amp;lt;script src=&quot;frameworks/cocos2d-html5/CCBoot.js&quot;&amp;gt;&amp;lt;/sc">
+  
+    <link rel="alternate" href="/atom.xml" title="李克兢" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李克兢</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Cocos2dx-JS学习01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/18/Cocos2dx-JS学习01/" class="article-date">
+  <time datetime="2018-07-18T02:30:20.000Z" itemprop="datePublished">2018-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Cocos2dx-JS学习01
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"res/loading.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"gameCanvas"</span> <span class="attr">width</span>=<span class="string">"480"</span> <span class="attr">height</span>=<span class="string">"720"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"frameworks/cocos2d-html5/CCBoot.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">cocos</span> <span class="attr">src</span>=<span class="string">"main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>首先加载的是CCBoot.js文件</p>
+<h1 id="CCBoot-js"><a href="#CCBoot-js" class="headerlink" title="CCBoot.js"></a>CCBoot.js</h1><h1 id="执行主循环"><a href="#执行主循环" class="headerlink" title="执行主循环"></a>执行主循环</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Run main loop of director</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">mainLoop: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._purgeDirectorInNextLoop) &#123;</span><br><span class="line">        <span class="keyword">this</span>._purgeDirectorInNextLoop = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.purgeDirector();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (!<span class="keyword">this</span>.invalid) &#123;</span><br><span class="line">        <span class="keyword">this</span>.drawScene();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>_purgeDirectorInNextLoop：下一帧是否需要清除自身，一般在<code>cc.director.end()</code>赋值为true</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  Draw the scene. This method is called every frame. Don't call it manually.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">drawScene: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> renderer = cc.renderer;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// calculate "global" dt</span></span><br><span class="line">    <span class="keyword">this</span>.calculateDeltaTime();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//tick before glClear: issue #533</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>._paused) &#123;</span><br><span class="line">        <span class="keyword">this</span>._scheduler.update(<span class="keyword">this</span>._deltaTime);</span><br><span class="line">        cc.eventManager.dispatchEvent(<span class="keyword">this</span>._eventAfterUpdate);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//首先执行调度器中的任务，然后触发cc.director.EVENT_AFTER_UPDATE事件，检查交互事件,有的话就分发处理</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line">    <span class="comment">/* to avoid flickr, nextScene MUST be here: after tick and before draw.</span></span><br><span class="line"><span class="comment">     <span class="doctag">XXX:</span> Which bug is this one. It seems that it can't be reproduced with v0.9 */</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._nextScene) &#123;</span><br><span class="line">        <span class="keyword">this</span>.setNextScene();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果有场景切换，便切换</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//渲染当前scene</span></span><br><span class="line">    <span class="comment">// draw the scene</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._runningScene) &#123;</span><br><span class="line">        <span class="keyword">if</span> (renderer.childrenOrderDirty) &#123;</span><br><span class="line">            cc.renderer.clearRenderCommands();</span><br><span class="line">            cc.renderer.assignedZ = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">this</span>._runningScene._renderCmd._curLevel = <span class="number">0</span>;                          <span class="comment">//level start from 0;</span></span><br><span class="line">            <span class="keyword">this</span>._runningScene.visit();</span><br><span class="line">            renderer.resetFlag();</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (renderer.transformDirty()) &#123;</span><br><span class="line">            renderer.transform();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    renderer.clear();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// draw the notifications node</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._notificationNode)</span><br><span class="line">        <span class="keyword">this</span>._notificationNode.visit();</span><br><span class="line">    <span class="comment">//遍历节点，更新节点的空间转换矩阵，发送指令给渲染器</span></span><br><span class="line">    cc.eventManager.dispatchEvent(<span class="keyword">this</span>._eventAfterVisit);</span><br><span class="line">    cc.g_NumberOfDraws = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    renderer.rendering(cc._renderContext);</span><br><span class="line">    <span class="keyword">this</span>._totalFrames++;</span><br><span class="line">	<span class="comment">//排序，绘制</span></span><br><span class="line">    cc.eventManager.dispatchEvent(<span class="keyword">this</span>._eventAfterDraw);</span><br><span class="line">    cc.eventManager.frameUpdateListeners();</span><br><span class="line">    <span class="comment">//更新帧率</span></span><br><span class="line">    <span class="keyword">this</span>._calculateMPF();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>关于绘制管理</p>
+<p>关于内存管理（引用计数法）</p>
+<h2 id="调度器"><a href="#调度器" class="headerlink" title="调度器"></a>调度器</h2><p>cc.Node有相关API</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node.scheduleUpdate()</span><br><span class="line">node.update = <span class="function"><span class="keyword">function</span> (<span class="params">dt</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>默认调度器：使用scheduleUpdate，必须重写update函数，dt是时间间隔</p>
+<p>自定义调度器：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.schedule(callback,inteval,repeate,delay,key)</span><br></pre></td></tr></table></figure>
+<p>回调函数（必须），时间间隔（默认0），重复次数（默认cc.REPEAT_FOREVER），延时时间（默认0），唯一标示符</p>
+<p>卸载调度器：</p>
+<p>unschedule和unscheduleAllCallbacks</p>
+<h2 id="场景管理"><a href="#场景管理" class="headerlink" title="场景管理"></a>场景管理</h2><p>使用栈的结构</p>
+<p>在退出的相关生命周期函数中，应该将this._super()函数放在最后调用，遵循“先进后出“</p>
+<p>A-&gt;B</p>
+<p>SceneA的onEixtTransitionDidStart方法开始前SceneB的ctor执行，所以不要在ctor中做开销大的工作</p>
+<h2 id="精灵"><a href="#精灵" class="headerlink" title="精灵"></a>精灵</h2><p>每个精灵一般关联一张纹理（Texture2D对象）</p>
+<p>四种方法创建</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/18/Cocos2dx-JS学习01/" data-id="cjjqkane30003itv0nqghaox9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/18/JS隐式转换/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS隐式转换</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/18/Cocos2dx-JS学习01/">Cocos2dx-JS学习01</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/JS隐式转换/">JS隐式转换</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/Cocos2d中的removeFromParent/">Cocos2d中的removeFromParent</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/09/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/28/JS02作用域和执行上下文/">JS02作用域和执行上下文</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 kjlist<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

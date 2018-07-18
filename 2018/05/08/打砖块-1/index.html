@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="李克兢">
 <meta property="og:description" content="#打砖块-1 ##Tutorial部分 首先完成功能”一个通过’a’和’d’控制左右移动的图片” 代码如下 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768&amp;lt;html lang=&quot;en&quot;&amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-03T09:11:22.000Z">
+<meta property="og:updated_time" content="2018-07-04T01:28:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="打砖块-1">
 <meta name="twitter:description" content="#打砖块-1 ##Tutorial部分 首先完成功能”一个通过’a’和’d’控制左右移动的图片” 代码如下 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768&amp;lt;html lang=&quot;en&quot;&amp;">
@@ -119,13 +119,15 @@
 <p>然后在setInterval中遍历并处理事件</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> actions = <span class="built_in">Object</span>.keys(g.actions)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; actions.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> key = actions[i]</span><br><span class="line">    <span class="keyword">if</span>(g.keydowns[key]) &#123;</span><br><span class="line">        <span class="comment">// 如果按键被按下, 调用注册的 action</span></span><br><span class="line">        g.actions[key]()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>##myWay部分</p>
+<p>完成了基本环节的搭建，对象只做了挡板</p>
 <p>思考：1. 用if语句根据条件执行方法的,可以考虑改用<code>actions[key]()</code>映射</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">actions[action] &amp;&amp; actions[action](event)</span><br></pre></td></tr></table></figure>
+<p>本篇中使用了<code>actions: {}, keydowns: {},</code>两个对象来完成功能，主要原因是在于回调方法是在setInterval中调用的，而回调方法是否调用的判断和按键有关，所以需要两个对象完成</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/08/打砖块-1/" data-id="cjj5h5g57000ilbv08zqi76b0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/08/打砖块-1/" data-id="cjjqkanf1000ritv0ezlryohe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -165,7 +167,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
     </div>
   </div>
 
@@ -175,7 +177,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a>
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
     </div>
   </div>
 
@@ -184,7 +186,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
     </div>
   </div>
 
@@ -197,23 +199,23 @@
       <ul>
         
           <li>
+            <a href="/2018/07/18/Cocos2dx-JS学习01/">Cocos2dx-JS学习01</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/JS隐式转换/">JS隐式转换</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/Cocos2d中的removeFromParent/">Cocos2d中的removeFromParent</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/09/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
             <a href="/2018/06/28/JS02作用域和执行上下文/">JS02作用域和执行上下文</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/27/位操作/">位操作</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/27/JS01原型和原型链/">JS01原型和原型链</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/12/c-Learning02/">c++Learning02</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/01/c和指针13/">c和指针13</a>
           </li>
         
       </ul>

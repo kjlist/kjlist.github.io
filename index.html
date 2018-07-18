@@ -62,6 +62,210 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Cocos2dx-JS学习01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/18/Cocos2dx-JS学习01/" class="article-date">
+  <time datetime="2018-07-18T02:30:20.000Z" itemprop="datePublished">2018-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/18/Cocos2dx-JS学习01/">Cocos2dx-JS学习01</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"res/loading.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"gameCanvas"</span> <span class="attr">width</span>=<span class="string">"480"</span> <span class="attr">height</span>=<span class="string">"720"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"frameworks/cocos2d-html5/CCBoot.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">cocos</span> <span class="attr">src</span>=<span class="string">"main.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>首先加载的是CCBoot.js文件</p>
+<h1 id="CCBoot-js"><a href="#CCBoot-js" class="headerlink" title="CCBoot.js"></a>CCBoot.js</h1><h1 id="执行主循环"><a href="#执行主循环" class="headerlink" title="执行主循环"></a>执行主循环</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Run main loop of director</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">mainLoop: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._purgeDirectorInNextLoop) &#123;</span><br><span class="line">        <span class="keyword">this</span>._purgeDirectorInNextLoop = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.purgeDirector();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (!<span class="keyword">this</span>.invalid) &#123;</span><br><span class="line">        <span class="keyword">this</span>.drawScene();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>_purgeDirectorInNextLoop：下一帧是否需要清除自身，一般在<code>cc.director.end()</code>赋值为true</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  Draw the scene. This method is called every frame. Don't call it manually.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">drawScene: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> renderer = cc.renderer;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// calculate "global" dt</span></span><br><span class="line">    <span class="keyword">this</span>.calculateDeltaTime();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//tick before glClear: issue #533</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>._paused) &#123;</span><br><span class="line">        <span class="keyword">this</span>._scheduler.update(<span class="keyword">this</span>._deltaTime);</span><br><span class="line">        cc.eventManager.dispatchEvent(<span class="keyword">this</span>._eventAfterUpdate);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//首先执行调度器中的任务，然后触发cc.director.EVENT_AFTER_UPDATE事件，检查交互事件,有的话就分发处理</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line">    <span class="comment">/* to avoid flickr, nextScene MUST be here: after tick and before draw.</span></span><br><span class="line"><span class="comment">     <span class="doctag">XXX:</span> Which bug is this one. It seems that it can't be reproduced with v0.9 */</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._nextScene) &#123;</span><br><span class="line">        <span class="keyword">this</span>.setNextScene();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果有场景切换，便切换</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//渲染当前scene</span></span><br><span class="line">    <span class="comment">// draw the scene</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._runningScene) &#123;</span><br><span class="line">        <span class="keyword">if</span> (renderer.childrenOrderDirty) &#123;</span><br><span class="line">            cc.renderer.clearRenderCommands();</span><br><span class="line">            cc.renderer.assignedZ = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">this</span>._runningScene._renderCmd._curLevel = <span class="number">0</span>;                          <span class="comment">//level start from 0;</span></span><br><span class="line">            <span class="keyword">this</span>._runningScene.visit();</span><br><span class="line">            renderer.resetFlag();</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (renderer.transformDirty()) &#123;</span><br><span class="line">            renderer.transform();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    renderer.clear();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// draw the notifications node</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._notificationNode)</span><br><span class="line">        <span class="keyword">this</span>._notificationNode.visit();</span><br><span class="line">    <span class="comment">//遍历节点，更新节点的空间转换矩阵，发送指令给渲染器</span></span><br><span class="line">    cc.eventManager.dispatchEvent(<span class="keyword">this</span>._eventAfterVisit);</span><br><span class="line">    cc.g_NumberOfDraws = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    renderer.rendering(cc._renderContext);</span><br><span class="line">    <span class="keyword">this</span>._totalFrames++;</span><br><span class="line">	<span class="comment">//排序，绘制</span></span><br><span class="line">    cc.eventManager.dispatchEvent(<span class="keyword">this</span>._eventAfterDraw);</span><br><span class="line">    cc.eventManager.frameUpdateListeners();</span><br><span class="line">    <span class="comment">//更新帧率</span></span><br><span class="line">    <span class="keyword">this</span>._calculateMPF();</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>关于绘制管理</p>
+<p>关于内存管理（引用计数法）</p>
+<h2 id="调度器"><a href="#调度器" class="headerlink" title="调度器"></a>调度器</h2><p>cc.Node有相关API</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node.scheduleUpdate()</span><br><span class="line">node.update = <span class="function"><span class="keyword">function</span> (<span class="params">dt</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>默认调度器：使用scheduleUpdate，必须重写update函数，dt是时间间隔</p>
+<p>自定义调度器：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.schedule(callback,inteval,repeate,delay,key)</span><br></pre></td></tr></table></figure>
+<p>回调函数（必须），时间间隔（默认0），重复次数（默认cc.REPEAT_FOREVER），延时时间（默认0），唯一标示符</p>
+<p>卸载调度器：</p>
+<p>unschedule和unscheduleAllCallbacks</p>
+<h2 id="场景管理"><a href="#场景管理" class="headerlink" title="场景管理"></a>场景管理</h2><p>使用栈的结构</p>
+<p>在退出的相关生命周期函数中，应该将this._super()函数放在最后调用，遵循“先进后出“</p>
+<p>A-&gt;B</p>
+<p>SceneA的onEixtTransitionDidStart方法开始前SceneB的ctor执行，所以不要在ctor中做开销大的工作</p>
+<h2 id="精灵"><a href="#精灵" class="headerlink" title="精灵"></a>精灵</h2><p>每个精灵一般关联一张纹理（Texture2D对象）</p>
+<p>四种方法创建</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/18/Cocos2dx-JS学习01/" data-id="cjjqkane30003itv0nqghaox9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS隐式转换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/18/JS隐式转换/" class="article-date">
+  <time datetime="2018-07-18T00:57:34.000Z" itemprop="datePublished">2018-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/18/JS隐式转换/">JS隐式转换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var log = console.log.bind(this)</span><br><span class="line">log([1,2,3] == "1,2,3")//true</span><br><span class="line">log([] == "")//true</span><br><span class="line">log("" == '')//true</span><br><span class="line">log("" == 0)//true</span><br><span class="line">log(true == 1)//true</span><br><span class="line">log(null == undefined)//true</span><br></pre></td></tr></table></figure>
+<img src="/2018/07/18/JS隐式转换/JS隐式转换.jpg" title="This is an example image">
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">log([] == <span class="literal">false</span>)<span class="comment">//true</span></span><br><span class="line">log(![] == <span class="literal">false</span>)<span class="comment">//true</span></span><br><span class="line">log([] == <span class="literal">false</span>)<span class="comment">//true</span></span><br><span class="line">log(![] == <span class="literal">false</span>)<span class="comment">//true</span></span><br><span class="line">log(!<span class="string">''</span> == <span class="literal">true</span>)<span class="comment">//true</span></span><br><span class="line">log(!<span class="literal">NaN</span> == <span class="literal">true</span>)<span class="comment">//true</span></span><br><span class="line">log(!<span class="literal">undefined</span> == <span class="literal">true</span>)<span class="comment">//true</span></span><br><span class="line">log(!<span class="literal">null</span> == <span class="literal">true</span>)<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>![]直接转换为布尔值再取反，转换为布尔值时，<strong>空字符串(‘’),NaN,0，null,undefined</strong>这几个外返回的都是true.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">log(<span class="literal">undefined</span> == <span class="literal">null</span>) <span class="comment">//true undefined和null 比较返回true，二者和其他值比较返回false</span></span><br><span class="line">log(<span class="built_in">Number</span>(<span class="literal">null</span>)) <span class="comment">//0</span></span><br><span class="line">log(<span class="built_in">Number</span>(<span class="literal">undefined</span>)) <span class="comment">//NaN</span></span><br></pre></td></tr></table></figure>
+<p>关于NaN：<a href="http://www.w3school.com.cn/js/jsref_nan_number.asp" target="_blank" rel="noopener">http://www.w3school.com.cn/js/jsref_nan_number.asp</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/18/JS隐式转换/" data-id="cjjqkane60005itv0rt74y1vx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Cocos2d中的removeFromParent" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/12/Cocos2d中的removeFromParent/" class="article-date">
+  <time datetime="2018-07-12T06:52:53.000Z" itemprop="datePublished">2018-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/12/Cocos2d中的removeFromParent/">Cocos2d中的removeFromParent</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Node::removeFromParent()</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>-&gt;removeFromParentAndCleanup(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Node::removeFromParentAndCleanup(<span class="keyword">bool</span> cleanup)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (_parent != <span class="literal">nullptr</span>)</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        _parent-&gt;removeChild(<span class="keyword">this</span>,cleanup);</span><br><span class="line"></span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* "remove" logic MUST only be on this method</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">\* If a class want's to extend the 'removeChild' behavior it only needs</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">\* to override this method</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Node::removeChild(Node* child, <span class="keyword">bool</span> cleanup <span class="comment">/* = true */</span>)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// explicit nil handling</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (_children.empty())</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">ssize_t</span> index = _children.getIndex(child);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>( index != CC_INVALID_INDEX )</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>-&gt;detachChild( child, index, cleanup );</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">ssize_t</span> getIndex(T object) <span class="keyword">const</span></span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">auto</span> iter = <span class="built_in">std</span>::find(_data.begin(), _data.end(), object);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (iter != _data.end())</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> iter - _data.begin();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Node::detachChild(Node *child, <span class="keyword">ssize_t</span> childIndex, <span class="keyword">bool</span> doCleanup)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// IMPORTANT:</span></span><br><span class="line">    <span class="comment">//  -1st do onExit</span></span><br><span class="line">    <span class="comment">//  -2nd cleanup</span></span><br><span class="line">    <span class="keyword">if</span> (_running)</span><br><span class="line">    &#123;</span><br><span class="line">        child-&gt;onExitTransitionDidStart();</span><br><span class="line">        child-&gt;onExit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If you don't do cleanup, the child's actions will not get removed and the</span></span><br><span class="line">    <span class="comment">// its scheduledSelectors_ dict will not get released!</span></span><br><span class="line">    <span class="keyword">if</span> (doCleanup)</span><br><span class="line">    &#123;</span><br><span class="line">        child-&gt;cleanup();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> CC_ENABLE_GC_FOR_NATIVE_OBJECTS</span></span><br><span class="line">    <span class="keyword">auto</span> sEngine = ScriptEngineManager::getInstance()-&gt;getScriptEngine();</span><br><span class="line">    <span class="keyword">if</span> (sEngine)</span><br><span class="line">    &#123;</span><br><span class="line">        sEngine-&gt;releaseScriptObject(<span class="keyword">this</span>, child);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// CC_ENABLE_GC_FOR_NATIVE_OBJECTS</span></span></span><br><span class="line">    <span class="comment">// set parent nil at the end</span></span><br><span class="line">    child-&gt;setParent(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">    _children.erase(childIndex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Node* Node::getChildByName(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name) <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    CCASSERT(!name.empty(), <span class="string">"Invalid name"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">std</span>::hash&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; h;</span><br><span class="line">    <span class="keyword">size_t</span> hash = h(name);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; child : _children)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Different strings may have the same hash code, but can use it to compare first for speed</span></span><br><span class="line">        <span class="keyword">if</span>(child-&gt;_hashOfName == hash &amp;&amp; child-&gt;_name.compare(name) == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> child;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要remove的时候搜索到找到在Vector&lt;Node*&gt; _children; 中的index，然后erase掉</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/12/Cocos2d中的removeFromParent/" data-id="cjjqkane40004itv0t6bblk92" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-WebSocket" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/09/WebSocket/" class="article-date">
+  <time datetime="2018-07-09T02:16:18.000Z" itemprop="datePublished">2018-07-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/09/WebSocket/">WebSocket</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="WebSocket与HTTP的异同"><a href="#WebSocket与HTTP的异同" class="headerlink" title="WebSocket与HTTP的异同"></a>WebSocket与HTTP的异同</h1><p>HTTP只能由客户端发起，做不到服务器主动推送消息（单向请求）。当服务器有连续的状态变化的时候，客户端想要获知只能采用轮询的方式（效率低，浪费资源）。</p>
+<p>当需要在浏览器做一个在线多人游戏的时候，浏览器通过JavaScript启动一个定时器，然后以固定的间隔给服务器发请求，询问服务器有没有新消息。这个机制的缺点一是实时性不够，二是频繁的请求会给服务器带来极大的压力。所以需要一个新的协议来建立无限制的全双工通信</p>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>WebSocket利用了HTTP协议来建立连接。握手阶段采用 HTTP 协议</p>
+<p>连接必须由浏览器发起，因为请求协议是一个标准的HTTP请求，格式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET ws:<span class="comment">//localhost:3000/ws/chat HTTP/1.1</span></span><br><span class="line">Host: localhost</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Origin: http:<span class="comment">//localhost:3000</span></span><br><span class="line">Sec-WebSocket-Key: client-random-string</span><br><span class="line">Sec-WebSocket-Version: <span class="number">13</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>GET请求的地址不是类似<code>/path/</code>，而是以<code>ws://</code>开头的地址；</li>
+<li>请求头<code>Upgrade: websocket</code>和<code>Connection: Upgrade</code>表示这个连接将要被转换为WebSocket连接；</li>
+<li><code>Sec-WebSocket-Key</code>是用于标识这个连接，并非用于加密数据；</li>
+<li><code>Sec-WebSocket-Version</code>指定了WebSocket的协议版本。</li>
+</ol>
+<p>浏览器的response如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">101</span> Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Accept: server-random-string</span><br></pre></td></tr></table></figure>
+<p>状态码101的意思是</p>
+<img src="/2018/07/09/WebSocket/WebScoket01.jpg" title="This is an example image">
+<p><a href="https://www.wikiwand.com/zh-hans/HTTP%E7%8A%B6%E6%80%81%E7%A0%81" target="_blank" rel="noopener">HTTP状态码</a></p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>建立在 TCP 协议之上，服务器端的实现比较容易</p>
+<p>与 HTTP 协议有着良好的兼容性。默认端口也是80和443，并且握手阶段采用 HTTP 协议，因此握手时不容易屏蔽，能通过各种 HTTP 代理服务器。</p>
+<p>数据格式比较轻量，性能开销小，通信高效。</p>
+<p>可以发送文本，也可以发送二进制数据。</p>
+<p>没有同源限制，客户端可以与任意服务器通信</p>
+<p>协议标识符是<code>ws</code>（如果加密，则为<code>wss</code>），服务器网址就是 URL。</p>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket" target="_blank" rel="noopener">WebSocket MDN</a></p>
+<h2 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h2><p>可以使用WebSocketd简单搭建一个服务器</p>
+<p>WebSocketd可以使用brew下载</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/09/WebSocket/" data-id="cjjqkanec000ditv0fhsiyijr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络/">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-JS02作用域和执行上下文" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/06/28/JS02作用域和执行上下文/" class="article-date">
@@ -106,58 +310,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/28/JS02作用域和执行上下文/" data-id="cjj5h5g4d0001lbv0qf2np4u9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/28/JS02作用域和执行上下文/" data-id="cjjqkandz0001itv0x3r1sxwi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-位操作" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/27/位操作/" class="article-date">
-  <time datetime="2018-06-27T08:28:37.000Z" itemprop="datePublished">2018-06-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/27/位操作/">位操作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><p>异或运算又名半加运算，相同为0，不同为1。</p>
-<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><ol>
-<li>一个比特与对它取反的值做异或，结果总是1。因此a^(~a)的结果是1s（一串1）</li>
-<li>x&amp;(~0&lt;&lt;i)将x的最左边i位清零</li>
-<li>x^0s = x       x^1s = ~x </li>
-</ol>
-<p>#常见位操作</p>
-<h2 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num&amp;(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="置位"><a href="#置位" class="headerlink" title="置位"></a>置位</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> setBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num|(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="清零"><a href="#清零" class="headerlink" title="清零"></a>清零</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> clearBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num&amp;(~(<span class="number">1</span>&lt;&lt;i)))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将num最高位至i位(含)清零</span></span><br><span class="line"><span class="keyword">var</span> clearBitsMSBthoughti = <span class="function"><span class="keyword">function</span> (<span class="params">num, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num &amp; ((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将i位至0位(含)清零</span></span><br><span class="line"><span class="keyword">var</span> clearBitsIthought0 = <span class="function"><span class="keyword">function</span> (<span class="params">num, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num (~((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> updateBit = <span class="function"><span class="keyword">function</span> (<span class="params">num, i, v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> mask = ~(<span class="number">1</span> &lt;&lt; i)</span><br><span class="line">    <span class="keyword">return</span> (num &amp; mask) | (v &lt;&lt; i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/27/位操作/" data-id="cjj5h5g4n0009lbv0e4h935jo" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li></ul>
 
     </footer>
   </div>
@@ -205,6 +361,8 @@
 <h1 id="原型的原型"><a href="#原型的原型" class="headerlink" title="原型的原型"></a>原型的原型</h1><p>#JavaScript动态特性的副作用</p>
 <p>对象与函数原型之间引用关系是在对象创建时建立的,如果原型在代码过程中被篡改,新创建的对象将引用新的原型,原来旧的对象保持着原有的原型的引用</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> log = <span class="built_in">console</span>.log.bind(<span class="keyword">this</span>)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.swung = <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> ninja1 = <span class="keyword">new</span> Ninja()</span><br><span class="line">Ninja.prototype.swingSword = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.swung</span><br><span class="line">&#125;</span><br><span class="line">log(ninja1.__proto__)<span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line">Ninja.prototype = &#123;</span><br><span class="line">    pierce : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">log(ninja1.__proto__)  <span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line"><span class="keyword">const</span> ninja2 = <span class="keyword">new</span> Ninja()</span><br><span class="line">log(ninja2.__proto__)  <span class="comment">//&#123; pierce: [Function: pierce] &#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数（function）对象的原型链"><a href="#函数（function）对象的原型链" class="headerlink" title="函数（function）对象的原型链"></a>函数（function）对象的原型链</h2><p>在JavaScript中，函数是一个特殊的对象，所有函数都是构造函数Function的实例，所以原型链会有所不同</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> log = <span class="built_in">console</span>.log.bind(<span class="keyword">this</span>)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">log(Ninja)<span class="comment">//[Function: Ninja]</span></span><br><span class="line">log(<span class="keyword">typeof</span> <span class="built_in">Function</span>)<span class="comment">//function</span></span><br><span class="line">log(Ninja.__proto__)<span class="comment">//[Function] 对象的__proto__是对象,不可能是方法</span></span><br><span class="line">log(Ninja.__proto__ === <span class="built_in">Function</span>.prototype)<span class="comment">//true</span></span><br><span class="line">log(<span class="built_in">Function</span>.__proto__)<span class="comment">//[Function]</span></span><br><span class="line">log(<span class="built_in">Function</span>.prototype)<span class="comment">//[Function]</span></span><br></pre></td></tr></table></figure>
 <p>#Cautions</p>
 <h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><ol>
 <li><p>因为所有实例对象都可以访问 constructor 属性所以可以使用 <code>const ninja2 = new ninja1.constructor()</code>来初始化</p>
@@ -217,10 +375,58 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/27/JS01原型和原型链/" data-id="cjj5h5g490000lbv0a62bs5xg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/27/JS01原型和原型链/" data-id="cjjqkandv0000itv0lvn4ji8o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-位操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/27/位操作/" class="article-date">
+  <time datetime="2018-06-27T08:28:37.000Z" itemprop="datePublished">2018-06-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/27/位操作/">位操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h1><p>异或运算又名半加运算，相同为0，不同为1。</p>
+<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><ol>
+<li>一个比特与对它取反的值做异或，结果总是1。因此a^(~a)的结果是1s（一串1）</li>
+<li>x&amp;(~0&lt;&lt;i)将x的最左边i位清零</li>
+<li>x^0s = x       x^1s = ~x </li>
+</ol>
+<p>#常见位操作</p>
+<h2 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num&amp;(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="置位"><a href="#置位" class="headerlink" title="置位"></a>置位</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> setBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num|(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="清零"><a href="#清零" class="headerlink" title="清零"></a>清零</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> clearBit = <span class="function"><span class="keyword">function</span> (<span class="params">num,i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (num&amp;(~(<span class="number">1</span>&lt;&lt;i)))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将num最高位至i位(含)清零</span></span><br><span class="line"><span class="keyword">var</span> clearBitsMSBthoughti = <span class="function"><span class="keyword">function</span> (<span class="params">num, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num &amp; ((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//将i位至0位(含)清零</span></span><br><span class="line"><span class="keyword">var</span> clearBitsIthought0 = <span class="function"><span class="keyword">function</span> (<span class="params">num, i</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num (~((<span class="number">1</span> &lt;&lt; i) - <span class="number">1</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> updateBit = <span class="function"><span class="keyword">function</span> (<span class="params">num, i, v</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> mask = ~(<span class="number">1</span> &lt;&lt; i)</span><br><span class="line">    <span class="keyword">return</span> (num &amp; mask) | (v &lt;&lt; i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/27/位操作/" data-id="cjjqkanek000kitv0wjr2pv8o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li></ul>
 
     </footer>
   </div>
@@ -261,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/12/c-Learning02/" data-id="cjj5h5g52000glbv0halybi5b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/12/c-Learning02/" data-id="cjjqkanez000pitv06lidhb8r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -297,7 +503,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/01/c和指针13/" data-id="cjj5h5g4l0008lbv03wp0kvu7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/01/c和指针13/" data-id="cjjqkanef000gitv0pujyw0ci" class="article-share-link">Share</a>
       
       
     </footer>
@@ -333,283 +539,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/01/打砖块-2/" data-id="cjj5h5g53000hlbv0a4nne28h" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-c-Learning01" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/26/c-Learning01/" class="article-date">
-  <time datetime="2018-05-26T03:39:53.000Z" itemprop="datePublished">2018-05-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/26/c-Learning01/">c++Learning01</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="char和-w-char的区别"><a href="#char和-w-char的区别" class="headerlink" title="char和 w_char的区别"></a>char和 w_char的区别</h2><p>w_char是Unicode 字符的数据类型</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">wchar_t</span>;</span><br></pre></td></tr></table></figure>
-<p>一般在在头文件中有这样的定义</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">wchar_t</span> WCHAR</span><br></pre></td></tr></table></figure>
-<p>为了让编译器识别 Unicode 字符串,需要在字符串前加上 L</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">wchar_t</span> * a(<span class="string">L"china"</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><p>命名空间的作用是解决变量,函数重名问题</p>
-<p>没有命名的命名空间(匿名命名空间)可以直接使用,此时编译器会在内部为这个命名空间生成一个唯一的名字,而且还会自动生成一句 using 语句</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">namespce &#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">double</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>等价于</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> __UNIQUE_NAME_ &#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">double</span> d;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> __UNIQUE_NAME_;</span><br></pre></td></tr></table></figure>
-<p>注意:命名空间都是具有external 连接属性的,只是匿名的命名空间产生的<strong>UNIQUE_NAME</strong>在别的文件中无法得到,这个唯一的名字是不可见的.<br>C++ 新的标准中提倡使用匿名命名空间,而不推荐使用static,因为static用在不同的地方,涵义不同,容易造成混淆.另外,static不能修饰class.</p>
-<p>命名空间还可以使用别名</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> a = mySpace;</span><br></pre></td></tr></table></figure>
-<p>命名空间可以使用嵌套,使用嵌套的命名空间时需要用到::操作符</p>
-<p>命名空间可以拓展,用于软件的迭代式开发<br>一般不在命名空间中定义函数,而是声明一个函数指针,这个函数指针起到一个接口的作用<br>namespace 所有数据都是共有,不能加 private 修饰符,全是共有的</p>
-<p>using 的作用域,从上往下,必须在命名空间的后方,</p>
-<p>当 using 多个时,如果变量重名则命名空间冲突,会出现不明确错误.<br>命名空间如果在块语句内部using,则它的作用域在块结束后同时结束</p>
-<p>###命名空间和全局变量的区别</p>
-<p>c中全局变量可能会被局部变量屏蔽,在c++ 中可以使用::,”::”前面不加命名空间等价于取全局变量</p>
-<p>函数重载是设计了委托,根据参数不同委托到不同的地址执行不同的函数</p>
-<p>函数处理参数从右到左<br>默认参数放在右边,默认参数中间不允许加入不默认的,这样做是因为实参传给系统之后，系统会自左向右与形参进行匹配。如果函数时add(1,2)，那么a=1，b=2，c等于多少呢？我们只有把参数全部传递过去之后，系统才能获得c的值，但这样做的话，为什么还要设置函数的默认参数呢？</p>
-<p>所以编译系统不允许程序员这么做，因为这么做是毫无意义的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printf</span><span class="params">(<span class="keyword">int</span> c,<span class="keyword">int</span> a = <span class="number">5</span>)</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printf</span><span class="params">(<span class="keyword">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="comment">//    printf(6);</span></span><br><span class="line">    <span class="comment">//此时会有歧义,所以要用函数指针调用</span></span><br><span class="line">    <span class="keyword">void</span> (*p1)(<span class="keyword">int</span> c, <span class="keyword">int</span> a) = <span class="built_in">printf</span>;</span><br><span class="line"><span class="comment">//    void (*p2)(int c) = printf;</span></span><br><span class="line"><span class="comment">//    void (*pp)(int c) = printf;</span></span><br><span class="line">    p1(<span class="number">6</span>,<span class="number">7</span>);</span><br><span class="line">    <span class="comment">//参数需要补全,函数指针没有默认参数,需要全部输入数据,如果想使用默认参数特性最好使用命名空间去解决这个问题</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printf</span><span class="params">(<span class="keyword">int</span> c,<span class="keyword">int</span> a = <span class="number">5</span>)</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;a&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printf</span><span class="params">(<span class="keyword">double</span> c)</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;c&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="number">6</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种情况下不冲突,如果需要输入的参数类型不一样,数目不一样,顺序不一样,则不会出现冲突</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">一个引用符引用左值,两个引用符引用右值</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">getA</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;<span class="comment">//a在栈上,</span></span><br><span class="line">    <span class="keyword">int</span>&amp;ra = a;</span><br><span class="line">    <span class="keyword">return</span> ra;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> &amp; ra = getA();</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;ra&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"hello"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;ra&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 10</span></span><br><span class="line"><span class="comment">     * hello</span></span><br><span class="line"><span class="comment">     * 32767</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span>* &amp; <span class="title">getA</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> * p = <span class="keyword">new</span> <span class="keyword">int</span>(<span class="number">5</span>);</span><br><span class="line">    <span class="keyword">int</span> * &amp;rp = p;</span><br><span class="line">    <span class="keyword">return</span> rp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//返回引用指针</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *&amp; ra = getA();</span><br><span class="line"><span class="comment">//    int *p = ra;使用一个变量接着,</span></span><br><span class="line">        <span class="keyword">int</span> * p1 = ra;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;*ra&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;*p1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"hello"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//    delete (p1);</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;*p1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;*ra&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">//c++删除内存后禁止访问,而且指针</span></span><br><span class="line">    <span class="keyword">delete</span>(*p1);</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;p1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;*p1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;*ra&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 10</span></span><br><span class="line"><span class="comment">     * hello</span></span><br><span class="line"><span class="comment">     * 32767</span></span><br><span class="line"><span class="comment">     * */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在栈上面的内存会在函数调用完就清除掉</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//const</span></span><br><span class="line"><span class="comment">//c语言中const 变量可以被指针间接改变</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> num = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> *p = &amp;num;</span><br><span class="line">    *p = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,*p);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>c++中不行</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> num = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> *p = (<span class="keyword">int</span> *)&amp;num;</span><br><span class="line">    *p = <span class="number">2</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;num&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//所得结果仍然是5,因为int *p = (int *)&amp;num;()强转是C语言的转换方式</span></span><br><span class="line"><span class="comment">//虽然编译成功但是c++不会执行这段代码?还是执行了但是维护了一个常量表,通过 VS 反编译看看吧</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> num = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> *p = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt;(&amp;num);</span><br><span class="line">    *p = <span class="number">2</span>;<span class="comment">//编译通过,但是貌似并没有起作用</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;num&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> b =<span class="number">5</span>;</span><br><span class="line"><span class="comment">//    int const * p1(&amp;a);//经常使用这种形式,用于限定权限(所以不会严格的检查类型),只能读不能写,所以可以操作</span></span><br><span class="line"><span class="comment">//    const int * p2(&amp;a);</span></span><br><span class="line"><span class="comment">//    *p1 = 3;</span></span><br><span class="line"><span class="comment">//    *p2 = 6;</span></span><br><span class="line">        <span class="comment">// const在*左边,指向常量的指针变量,常量指针,不能改变指向的值</span></span><br><span class="line">                <span class="function"><span class="keyword">int</span> * <span class="keyword">const</span> <span class="title">p1</span><span class="params">(&amp;a)</span></span>;</span><br><span class="line">                <span class="comment">//指向变量的指针</span></span><br><span class="line">                <span class="function"><span class="keyword">int</span> * <span class="keyword">const</span> <span class="title">p2</span><span class="params">(&amp;b)</span></span>;<span class="comment">//cannot initialize a variable of type 'int *const' with an rvalue of type 'const int *'</span></span><br><span class="line"><span class="comment">//&amp;b是 const int * p2是一个指向变量的指针常量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//    const int * p2;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    int * const pp;</span></span><br><span class="line"><span class="comment">//    const int const * p3;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;rum)</span></span>&#123;</span><br><span class="line"><span class="comment">//    rum--;</span></span><br><span class="line">    <span class="keyword">return</span> rum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> num1 =<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> num2 = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;select(num2)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//真实的内存已经被修改,从常量表里获取了值</span></span><br><span class="line"><span class="comment">//const 编译器会优化,不会从内存读取</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">     <span class="comment">//不能 delete两次</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//    int a[10];</span></span><br><span class="line"><span class="comment">//    int * p = a;</span></span><br><span class="line"><span class="comment">//    int i = 0 ;</span></span><br><span class="line"><span class="comment">//    for (auto date:p)&#123;</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line">    <span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; ++j) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;p[j]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; ++j) &#123;</span><br><span class="line">        p[j] = i++;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;p[j]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;p&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">delete</span> []p;<span class="comment">//删除数组的空间,基本数据类型可以直接 delete, 复杂类型必须[]</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;p&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"><span class="comment">//    for (int j = 0; j &lt; 10; ++j) &#123;</span></span><br><span class="line"><span class="comment">//        std::cout&lt;&lt;p[j]&lt;&lt;endl;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *p = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">80</span>];</span><br><span class="line">    <span class="keyword">int</span> (*px) [<span class="number">10</span>] = (<span class="keyword">int</span> (*) [<span class="number">10</span>])p;</span><br><span class="line"><span class="comment">//new只能分配线性</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//    px[i][j];</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>删除数组的空间,基本数据类型可以直接 delete, 复杂类型必须[]</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/26/c-Learning01/" data-id="cjj5h5g4i0005lbv0dcypuuun" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-打砖块-1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/08/打砖块-1/" class="article-date">
-  <time datetime="2018-05-08T07:58:10.000Z" itemprop="datePublished">2018-05-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/08/打砖块-1/">打砖块-1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#打砖块-1</p>
-<p>##Tutorial部分</p>
-<p>首先完成功能”一个通过’a’和’d’控制左右移动的图片”</p>
-<p>代码如下</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">media</span>=<span class="string">"screen"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">        canvas&#123;</span></span><br><span class="line"><span class="undefined">        border : 1px black solid;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"id-canvas"</span> <span class="attr">width</span>=<span class="string">"400"</span> <span class="attr">height</span>=<span class="string">"300"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> x= <span class="number">100</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> y =<span class="number">200</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> speed = <span class="number">5</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> log = <span class="built_in">console</span>.log.bind(<span class="built_in">console</span>)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">"#id-canvas"</span>)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>)</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> leftPressed = <span class="literal">false</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> rightPressed = <span class="literal">false</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();   <span class="comment">// 创建一个&lt;img&gt;元素</span></span></span><br><span class="line"><span class="javascript">    img.src = <span class="string">'res/paddle.png'</span>; <span class="comment">// 设置图片源地址</span></span></span><br><span class="line"><span class="javascript">    img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="undefined">        ctx.drawImage(img,x,y)</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.addEventListener(<span class="string">"keydown"</span>,<span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">        log(event.key)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">switch</span> (event.key)&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">case</span> <span class="string">'a'</span>:</span></span><br><span class="line"><span class="javascript">                leftPressed = <span class="literal">true</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">break</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">case</span> <span class="string">'d'</span>:</span></span><br><span class="line"><span class="javascript">                rightPressed = <span class="literal">true</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">break</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">default</span>:</span></span><br><span class="line"><span class="javascript">                <span class="keyword">break</span></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.addEventListener(<span class="string">"keyup"</span>,<span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="undefined">        log(event.key)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">switch</span> (event.key)&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">case</span> <span class="string">'a'</span>:</span></span><br><span class="line"><span class="javascript">                leftPressed = <span class="literal">false</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">break</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">case</span> <span class="string">'d'</span>:</span></span><br><span class="line"><span class="javascript">                rightPressed = <span class="literal">false</span></span></span><br><span class="line"><span class="javascript">                <span class="keyword">break</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">default</span>:</span></span><br><span class="line"><span class="javascript">                <span class="keyword">break</span></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="javascript">    setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//update x y</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (leftPressed)&#123;</span></span><br><span class="line"><span class="undefined">            x -= speed</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">else</span> <span class="keyword">if</span> (rightPressed)&#123;</span></span><br><span class="line"><span class="undefined">            x += speed</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//draw</span></span></span><br><span class="line"><span class="undefined">        ctx.clearRect(0,0,400,300)</span></span><br><span class="line"><span class="undefined">        ctx.drawImage(img,x,y)</span></span><br><span class="line"><span class="undefined">    &#125;,1000/30)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>然后对以上代码进行优化抽象</p>
-<ol>
-<li><p>定义一个入口_main(),将所有代码放入</p>
-</li>
-<li><p>将代码拆成几个函数,</p>
-<ul>
-<li><p>paddle作为一个独立的个体，它的所有属性方法应该放到一起.</p>
-</li>
-<li><p>创建 guagame, 控制所有注册点击事件和setInterval函数</p>
-</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getImageFromStr = <span class="function"><span class="keyword">function</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> img = <span class="keyword">new</span> Image()</span><br><span class="line">        img.src = path</span><br><span class="line">        <span class="keyword">return</span> img</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//将常用的代码块抽取成为函数</span></span><br><span class="line">Paddle = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> o = &#123;</span><br><span class="line">            x: <span class="number">100</span>,</span><br><span class="line">            y: <span class="number">200</span>,</span><br><span class="line">            speed: <span class="number">5</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        o.image = getImageFromStr(<span class="string">'res/paddle.png'</span>)</span><br><span class="line">        o.moveLeft = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            o.x -= o.speed</span><br><span class="line">        &#125;</span><br><span class="line">        o.moveRight = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            o.x += o.speed</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> o;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>paddle 自己的逻辑应该让自己控制,所以</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (leftPressed)&#123;</span><br><span class="line">          x -= speed</span><br><span class="line">      &#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (rightPressed)&#123;</span><br><span class="line">          x += speed</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-<p>应该用对象自己的方法moveLeft和moveRight替换</p>
-<p>将事件注册, setInterval 、update和 draw 整体封装成一个GuaGame,作为控制对象</p>
-<p>控制对象里面需要有</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.querySelector(<span class="string">"#id-canvas"</span>)</span><br><span class="line"><span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>)</span><br></pre></td></tr></table></figure>
-<p>把setInterval放在GuaGame中</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="comment">//update</span></span><br><span class="line">g.update()</span><br><span class="line"><span class="comment">//clear</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//draw</span></span><br><span class="line">g.draw</span><br><span class="line">&#125;,<span class="number">1000</span>/<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
-<p>而update中的一些事件是通过注册来的，此时可以使用以下的巧妙方法完成</p>
-<p>首先</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> g = &#123;</span><br><span class="line">    actions: &#123;&#125;,</span><br><span class="line">    keydowns: &#123;&#125;,</span><br><span class="line">&#125;</span><br><span class="line">g.registerAction = <span class="function"><span class="keyword">function</span>(<span class="params">key, callback</span>) </span>&#123;</span><br><span class="line">            g.actions[key] = callback</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>然后在setInterval中遍历并处理事件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> actions = <span class="built_in">Object</span>.keys(g.actions)</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; actions.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> key = actions[i]</span><br><span class="line">    <span class="keyword">if</span>(g.keydowns[key]) &#123;</span><br><span class="line">        <span class="comment">// 如果按键被按下, 调用注册的 action</span></span><br><span class="line">        g.actions[key]()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>##myWay部分</p>
-<p>思考：1. 用if语句根据条件执行方法的,可以考虑改用<code>actions[key]()</code>映射</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">actions[action] &amp;&amp; actions[action](event)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/08/打砖块-1/" data-id="cjj5h5g57000ilbv08zqi76b0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-JavaScript忍者秘籍-第七章" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/05/JavaScript忍者秘籍-第七章/" class="article-date">
-  <time datetime="2018-05-05T06:41:17.000Z" itemprop="datePublished">2018-05-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/05/JavaScript忍者秘籍-第七章/">JavaScript忍者秘籍-第七章</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="面向对象与原型"><a href="#面向对象与原型" class="headerlink" title="面向对象与原型"></a>面向对象与原型</h1><p>###理解原型</p>
-<p>在 JS 中,可以通过原型实现继承</p>
-<p>原型的概念很简单.当查找属性时,若对象本身不具有该属性,则会查找原型上是否有该属性.</p>
-<p>通过操作符 in 我们可以测试对象是否拥有某属性</p>
-<p>Object.setPrototypeOf(a,b)方法将 b 对象设置为第一个对象的原型,对象的原型属性是内置属性(__proto__)</p>
-<p>每个对象都可以有一个原型,每个对象的原型也可以拥有一个原型,以此类推.形成了原型链</p>
-<h3 id="对象构造器与原型"><a href="#对象构造器与原型" class="headerlink" title="对象构造器与原型"></a>对象构造器与原型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Ninja)	<span class="comment">//[Function: Ninja]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> Ninja.prototype)		<span class="comment">//object</span></span><br><span class="line"><span class="comment">//Ninja.prototype 是对象 函数的prototype是对象</span></span><br><span class="line">Ninja.prototype.swingSword = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"-------"</span>)</span><br><span class="line"><span class="built_in">console</span>.log(Ninja)	<span class="comment">//[Function: Ninja]</span></span><br><span class="line"><span class="built_in">console</span>.log(Ninja.prototype)	<span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//ninja1=Ninja()    ninja1 undefine		加上()之后ninja1的赋值是函数的返回值</span></span><br><span class="line"><span class="comment">//ninja1=Ninja      ninja1 [Function: Ninja]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"-------"</span>)</span><br><span class="line"><span class="keyword">const</span> ninja1 = Ninja()</span><br><span class="line"><span class="built_in">console</span>.log(ninja1)</span><br><span class="line"><span class="keyword">const</span> ninja2 = <span class="keyword">new</span> Ninja()</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"--112-----"</span>)</span><br><span class="line"><span class="built_in">console</span>.log(ninja2.__proto__)	<span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(Ninja.prototype)	<span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(Ninja)	<span class="comment">//[Function: Ninja]</span></span><br><span class="line"><span class="built_in">console</span>.log(Ninja.prototype.constructor)<span class="comment">//[Function: Ninja]</span></span><br><span class="line"><span class="comment">// console.log(Ninja.prototype === ninja2.__proto__)</span></span><br><span class="line"><span class="comment">// console.log(Ninja.prototype.__proto__.__proto__)</span></span><br><span class="line"><span class="comment">//Ninja.prototype === ninja2.__proto__</span></span><br><span class="line"><span class="comment">//函数对应的prototype是 new 出来的对象的__proto__</span></span><br><span class="line"><span class="comment">//Ninja.prototype.__proto__ == &#123;&#125;</span></span><br><span class="line"><span class="comment">//Ninja.prototype.__proto__.__proto__ == null</span></span><br><span class="line"><span class="built_in">console</span>.log(ninja2)</span><br><span class="line"><span class="built_in">console</span>.log(ninja2.swingSword)</span><br><span class="line"><span class="built_in">console</span>.log(ninja2.swingSword())</span><br></pre></td></tr></table></figure>
-<p>通过 new 操作符调用函数意味着作为构造器调用</p>
-<ul>
-<li>每一个函数都具有一个原型对象(Ninja.prototype)</li>
-<li>每一个函数的原型都具有一个 constructor 属性,该属性指向函数本身(Ninja.prototype.constructor === Ninja)</li>
-<li>constructor对象的原型(NInja.prototype)设置为新创建的对象的原型</li>
-</ul>
-<p>我们创建的每一个函数都具有一个新的原型对象.最初的原型对象只有一个属性,即 constructor属性.该属性指向函数本身</p>
-<h4 id="实例属性和原型属性之间的区别"><a href="#实例属性和原型属性之间的区别" class="headerlink" title="实例属性和原型属性之间的区别"></a>实例属性和原型属性之间的区别</h4><p>实例会隐藏原型中与实例方法重名的方法</p>
-<p>实例中可以查找到的属性也不会查找原型</p>
-<h2 id="JS-动态特性的副作用"><a href="#JS-动态特性的副作用" class="headerlink" title="JS 动态特性的副作用"></a>JS 动态特性的副作用</h2><p>对象与函数原型之间引用关系是在对象创建时建立的,如果原型在代码过程中被篡改,新创建的对象将引用新的原型,原来旧的对象保持着原有的原型的引用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> log = <span class="built_in">console</span>.log.bind(<span class="keyword">this</span>)</span><br></pre></td></tr></table></figure>
-<p>因为后面大量使用了console.log()所以可以将其简化</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> log = <span class="built_in">console</span>.log.bind(<span class="keyword">this</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.swung = <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> ninja1 = <span class="keyword">new</span> Ninja()</span><br><span class="line">Ninja.prototype.swingSword = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.swung</span><br><span class="line">&#125;</span><br><span class="line">log(ninja1.__proto__)	<span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line">Ninja.prototype = &#123;</span><br><span class="line">    pierce : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">log(ninja1.__proto__)	<span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line"><span class="keyword">const</span> ninja2 = <span class="keyword">new</span> Ninja()</span><br><span class="line">log(ninja2.__proto__)	<span class="comment">//&#123; pierce: [Function: pierce] &#125;</span></span><br></pre></td></tr></table></figure>
-<p>函数的原型可以被任意调换,而已经构建的实例引用旧的原型</p>
-<h3 id="通过构造函数实现对象类型"><a href="#通过构造函数实现对象类型" class="headerlink" title="通过构造函数实现对象类型"></a>通过构造函数实现对象类型</h3><p>通过使用 constructor 属性,我们可以访问创建该对象时使用的函数.这个特性可以用于类型校验</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> ninja1 = <span class="keyword">new</span> Ninja()</span><br><span class="line">log(ninja1 <span class="keyword">instanceof</span> Ninja)</span><br><span class="line">log(ninja1.constructor === Ninja)</span><br></pre></td></tr></table></figure>
-<p>instanceof:提供了一种用于检测一个实例是否由特定构造函数创建的方法</p>
-<p>因为所有实例对象都可以访问 constructor 属性所以可以使用 <code>const ninja2 = new ninja1.constructor()</code>来初始化</p>
-<h2 id="实现继承"><a href="#实现继承" class="headerlink" title="实现继承"></a>实现继承</h2><p>我们真正想要实现的是一个完整的原型链.创建这样的原型链的最佳技术方案是一个对象的原型直接是另一个对象的实例:</p>
-<p><code>SubClass.prototype = new SuperClass()</code></p>
-<p>通过执行 instanceof 操作符,我们可以判定函数是否继承原型链上的对象功能</p>
-<p> instanceof 操作符的实质是:检查操作符右边的函数的原型是否存在于操作符左边的对象的原型链上</p>
-<p>!!!不建议直接使用 Person 的原型对象作为 Ninja 的原型(Ninja.prototype = Person.prototype)这样做会导致在 Person 原型上所发生的所有变化都被同步到 Ninja 原型上(Person 原型与 Ninja 原型是同一个对象)一定会有不良的副作用</p>
-<h3 id="重写-constructor-属性的问题"><a href="#重写-constructor-属性的问题" class="headerlink" title="重写 constructor 属性的问题"></a>重写 constructor 属性的问题</h3><p>通过设置 Person 实例对象作为 Ninja 构造器的原型时,我们已经丢失了 Ninja 与 Ninja 初始原型之间的关联.这个问题需要修复.</p>
-<p>调整属性的配置信息可以使用内置的Object.defineProperty() .</p>
-<p>将配置项 enumerable 设为 false, 在 for-in 循环中无法遍历该属性.</p>
-<h2 id="在-ES6使用-class-关键字"><a href="#在-ES6使用-class-关键字" class="headerlink" title="在 ES6使用 class 关键字"></a>在 ES6使用 class 关键字</h2><p>底层仍然基于原型继承</p>
-<h3 id="实现”静态”方法"><a href="#实现”静态”方法" class="headerlink" title="实现”静态”方法"></a>实现”静态”方法</h3><p>使用Static关键字</p>
-<p>或者:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">Ninja.xxxcompare = <span class="function"><span class="keyword">function</span> (<span class="params">ninja1, ninja2</span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> ninja1 = <span class="keyword">new</span> Ninja()</span><br><span class="line"><span class="keyword">const</span> ninja2 = <span class="keyword">new</span> Ninja()</span><br><span class="line">log(ninja1.constructor.xxxcompare())	<span class="comment">//找不到的,静态方法</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/05/JavaScript忍者秘籍-第七章/" data-id="cjj5h5g4g0003lbv0xkkmdeb8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-算法-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/03/算法-2/" class="article-date">
-  <time datetime="2018-05-03T07:39:29.000Z" itemprop="datePublished">2018-05-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/03/算法-2/">算法-2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>You have been given a string <code>s</code>, which is supposed to be a sentence. However, someone forgot to put spaces between the different words, and for some reason they capitalized the first letter of every word. Return the sentence after making the following amendments:</p>
-<ul>
-<li>Put a single space between the words.</li>
-<li>Convert the uppercase letters to lowercase.</li>
-</ul>
-<p><strong>Example</strong></p>
-<ul>
-<li>For <code>s = &quot;CodefightsIsAwesome&quot;</code>, the output should be<br><code>amendTheSentence(s) = &quot;codefights is awesome&quot;</code>;</li>
-<li>For <code>s = &quot;Hello&quot;</code>, the output should be<br><code>amendTheSentence(s) = &quot;hello&quot;</code>.</li>
-</ul>
-<p><strong>Input/Output</strong></p>
-<ul>
-<li><p><strong>[execution time limit] 4 seconds (js)</strong></p>
-</li>
-<li><p><strong>[input] string s</strong></p>
-<p>A string containing uppercase and lowercase English letters.</p>
-<p><em>Guaranteed constraints:</em><br><code>3 ≤ s.length ≤ 100</code>.</p>
-</li>
-<li><p><strong>[output] string</strong></p>
-<p>The amended sentence.</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/算法-2/" data-id="cjj5h5g59000jlbv095g6om7h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/01/打砖块-2/" data-id="cjjqkanf0000qitv0yew7g2bn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -637,7 +567,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
     </div>
   </div>
 
@@ -647,7 +577,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a>
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
     </div>
   </div>
 
@@ -656,7 +586,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
     </div>
   </div>
 
@@ -669,23 +599,23 @@
       <ul>
         
           <li>
+            <a href="/2018/07/18/Cocos2dx-JS学习01/">Cocos2dx-JS学习01</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/JS隐式转换/">JS隐式转换</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/Cocos2d中的removeFromParent/">Cocos2d中的removeFromParent</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/09/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
             <a href="/2018/06/28/JS02作用域和执行上下文/">JS02作用域和执行上下文</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/27/位操作/">位操作</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/27/JS01原型和原型链/">JS01原型和原型链</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/12/c-Learning02/">c++Learning02</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/01/c和指针13/">c和指针13</a>
           </li>
         
       </ul>

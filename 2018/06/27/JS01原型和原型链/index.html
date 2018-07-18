@@ -16,7 +16,7 @@
 <meta property="og:description" content="#三个关系 1234function Ninja() &amp;#123;&amp;#125;console.log(Ninja) //[Function: Ninja]console.log(Ninja.prototype)   //Ninja &amp;#123;&amp;#125; 方法具有prototype属性，方法的prototype属性是一个对象 1234567var ninja = new Ninja()conso">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/06/27/JS01原型和原型链/proto01.jpg">
-<meta property="og:updated_time" content="2018-06-27T08:29:51.000Z">
+<meta property="og:updated_time" content="2018-07-10T02:15:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS01原型和原型链">
 <meta name="twitter:description" content="#三个关系 1234function Ninja() &amp;#123;&amp;#125;console.log(Ninja) //[Function: Ninja]console.log(Ninja.prototype)   //Ninja &amp;#123;&amp;#125; 方法具有prototype属性，方法的prototype属性是一个对象 1234567var ninja = new Ninja()conso">
@@ -106,6 +106,8 @@
 <h1 id="原型的原型"><a href="#原型的原型" class="headerlink" title="原型的原型"></a>原型的原型</h1><p>#JavaScript动态特性的副作用</p>
 <p>对象与函数原型之间引用关系是在对象创建时建立的,如果原型在代码过程中被篡改,新创建的对象将引用新的原型,原来旧的对象保持着原有的原型的引用</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> log = <span class="built_in">console</span>.log.bind(<span class="keyword">this</span>)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.swung = <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> ninja1 = <span class="keyword">new</span> Ninja()</span><br><span class="line">Ninja.prototype.swingSword = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.swung</span><br><span class="line">&#125;</span><br><span class="line">log(ninja1.__proto__)<span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line">Ninja.prototype = &#123;</span><br><span class="line">    pierce : <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">log(ninja1.__proto__)  <span class="comment">//Ninja &#123; swingSword: [Function] &#125;</span></span><br><span class="line"><span class="keyword">const</span> ninja2 = <span class="keyword">new</span> Ninja()</span><br><span class="line">log(ninja2.__proto__)  <span class="comment">//&#123; pierce: [Function: pierce] &#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数（function）对象的原型链"><a href="#函数（function）对象的原型链" class="headerlink" title="函数（function）对象的原型链"></a>函数（function）对象的原型链</h2><p>在JavaScript中，函数是一个特殊的对象，所有函数都是构造函数Function的实例，所以原型链会有所不同</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> log = <span class="built_in">console</span>.log.bind(<span class="keyword">this</span>)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ninja</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">log(Ninja)<span class="comment">//[Function: Ninja]</span></span><br><span class="line">log(<span class="keyword">typeof</span> <span class="built_in">Function</span>)<span class="comment">//function</span></span><br><span class="line">log(Ninja.__proto__)<span class="comment">//[Function] 对象的__proto__是对象,不可能是方法</span></span><br><span class="line">log(Ninja.__proto__ === <span class="built_in">Function</span>.prototype)<span class="comment">//true</span></span><br><span class="line">log(<span class="built_in">Function</span>.__proto__)<span class="comment">//[Function]</span></span><br><span class="line">log(<span class="built_in">Function</span>.prototype)<span class="comment">//[Function]</span></span><br></pre></td></tr></table></figure>
 <p>#Cautions</p>
 <h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><ol>
 <li><p>因为所有实例对象都可以访问 constructor 属性所以可以使用 <code>const ninja2 = new ninja1.constructor()</code>来初始化</p>
@@ -118,7 +120,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/27/JS01原型和原型链/" data-id="cjj5h5g490000lbv0a62bs5xg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/27/JS01原型和原型链/" data-id="cjjqkandv0000itv0lvn4ji8o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
@@ -129,19 +131,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/06/27/位操作/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/06/28/JS02作用域和执行上下文/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          位操作
+          JS02作用域和执行上下文
         
       </div>
     </a>
   
   
-    <a href="/2018/06/12/c-Learning02/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/06/27/位操作/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">c++Learning02</div>
+      <div class="article-nav-title">位操作</div>
     </a>
   
 </nav>
@@ -160,7 +162,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
     </div>
   </div>
 
@@ -170,7 +172,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a>
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
     </div>
   </div>
 
@@ -179,7 +181,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
     </div>
   </div>
 
@@ -192,23 +194,23 @@
       <ul>
         
           <li>
+            <a href="/2018/07/18/Cocos2dx-JS学习01/">Cocos2dx-JS学习01</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/JS隐式转换/">JS隐式转换</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/Cocos2d中的removeFromParent/">Cocos2d中的removeFromParent</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/09/WebSocket/">WebSocket</a>
+          </li>
+        
+          <li>
             <a href="/2018/06/28/JS02作用域和执行上下文/">JS02作用域和执行上下文</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/27/位操作/">位操作</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/27/JS01原型和原型链/">JS01原型和原型链</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/12/c-Learning02/">c++Learning02</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/01/c和指针13/">c和指针13</a>
           </li>
         
       </ul>

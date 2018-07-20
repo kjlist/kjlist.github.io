@@ -62,6 +62,78 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-c和指针13" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/01/c和指针13/" class="article-date">
+  <time datetime="2018-06-01T03:22:43.000Z" itemprop="datePublished">2018-06-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/01/c和指针13/">c和指针13</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="高级指针"><a href="#高级指针" class="headerlink" title="高级指针"></a>高级指针</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> *<span class="title">f</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//    //*f()是如何求值的,首先执行的是函数调用操作(因为()优先级高于*),因此 f 是一个返回值为指向整型的指针的函数</span></span><br><span class="line"><span class="comment">//    //用于声明比那辆的表达式和普通的表达式在求值所使用的规则相同</span></span><br><span class="line"><span class="keyword">int</span> (*f)();</span><br><span class="line"><span class="comment">//    //f 成为一个函数指针,这个函数返回一个 int 类型</span></span><br><span class="line"><span class="keyword">int</span> *(*f)();</span><br><span class="line"><span class="comment">//    //f 成为一个函数指针,这个函数返回一个 int* 类型</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">////    int f[10];</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">////    int f[];</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    //如果链接属性时 external 或者是作用函数的参数,即使它们在声明时未注明长度,也是合法的</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">////    int *f[10];</span></span><br><span class="line"><span class="comment">//    //[]的优先级高, f 是一个数组,里面存着 int*</span></span><br><span class="line"><span class="comment">////    int f()[10];</span></span><br><span class="line"><span class="comment">//    //f是一个函数,返回值是int数组 错误！返回值只能是标量值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">////    int f[10]();</span></span><br><span class="line"><span class="comment">//    //f是一个数组,元素类型是返回值为 int 类型的函数     错误！数组元素必须具有相同的长度,但不同的函数显然可能具有不同的长度</span></span><br><span class="line"><span class="comment">////    int (*f[10])();</span></span><br><span class="line"><span class="comment">//    //左括号----- f 是一个元素为某种类型的指针的数组 元素的类型是函数指针,它指向的函数的返回值是 int 类型</span></span><br><span class="line"><span class="comment">////    int *(*f[])();</span></span><br><span class="line"><span class="comment">//    //左括号----- f 是一个元素为某种类型的指针的数组 元素的类型是函数指针,它指向的函数的返回值是 int* 类型</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">////函数指针最常用的两个用途是转换表和作为参数传递给另一个函数</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">////!!!简单声明一个函数指针并不意味着它马上就可以使用.和其它指针一样,对函数指针执行间接访问之前必须把它初始化为指向某个函数</span></span><br><span class="line"><span class="comment">////int f(int);</span></span><br><span class="line"><span class="comment">////int (*pf)(int) = &amp;f;</span></span><br><span class="line"><span class="comment">//    //在函数指针初始化之前具有 f 的原型是很重要的</span></span><br><span class="line"><span class="comment">//    //int (*pf)(int) = &amp;f;中的&amp;可以省略,因为函数名被使用时总是由编译器把它转换成函数指针</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//    printf("Hello, World!\n");</span></span><br><span class="line"><span class="comment">//    return 0;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//查找</span></span><br><span class="line"><span class="comment">//#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">//#include &lt;node.h&gt;</span></span><br><span class="line"><span class="comment">//Node *</span></span><br><span class="line"><span class="comment">//search_list (Node * node void const * value,</span></span><br><span class="line"><span class="comment">//int (*compare) (void const *,void const *))&#123;</span></span><br><span class="line"><span class="comment">//    while (node != NULL)&#123;</span></span><br><span class="line"><span class="comment">//        if (compare(&amp;node-&gt;value,value) == 0)&#123;</span></span><br><span class="line"><span class="comment">//            break;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//        node = node-&gt;link;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//    return node;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">////和类型无关的查找</span></span><br><span class="line"><span class="comment">//int</span></span><br><span class="line"><span class="comment">//compare_ints(void const *a,void const *b)&#123;</span></span><br><span class="line"><span class="comment">//    if (*(int *)a == *(int *)b)&#123;</span></span><br><span class="line"><span class="comment">//        return 0;</span></span><br><span class="line"><span class="comment">//    &#125; else&#123;</span></span><br><span class="line"><span class="comment">//        return 1;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//转换表</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//把具体操作和选择操作分开是一种良好的设计方案</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//double add(double,double);</span></span><br><span class="line"><span class="comment">//double sub(double,double);</span></span><br><span class="line"><span class="comment">//double mul(double,double);</span></span><br><span class="line"><span class="comment">//double div(double,double);</span></span><br><span class="line"><span class="comment">//double (*oper_func[])(double, double) = &#123;</span></span><br><span class="line"><span class="comment">//        add,sub,mul,div,</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="comment">//result = oper_func[oper](op1,op2);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//如果你怀疑转移表有问题,可以在那个函数调用之前和之后各打印一条信息.如果被调用函数不返回,人们很难认识到程序某个部分的失败可以是位于程序中相隔甚远的且不相关部分的一个转移表错误所引起的.</span></span><br><span class="line"><span class="comment">//保证转移表所使用的下标位于合法的范围!</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串常量出现于表达式中时,它的值是一个指针常量</span></span><br><span class="line"><span class="comment">//"xyz"+1;结果是个指针,指向字符串中的第二个字符 y</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/01/c和指针13/" data-id="cjjts4xmo000dnmv02sxx3zif" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-打砖块-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/01/打砖块-2/" class="article-date">
+  <time datetime="2018-06-01T03:20:58.000Z" itemprop="datePublished">2018-06-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/01/打砖块-2/">打砖块-2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/01/打砖块-2/" data-id="cjjts4xmu000nnmv0rtgkrv55" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-c-Learning01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/26/c-Learning01/" class="article-date">
@@ -124,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/26/c-Learning01/" data-id="cjjqkanee000eitv0374ab67m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/26/c-Learning01/" data-id="cjjts4xmp000fnmv0kab2dlkj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -197,7 +269,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/08/打砖块-1/" data-id="cjjqkanf1000ritv0ezlryohe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/08/打砖块-1/" data-id="cjjts4xms000lnmv0mlwygvi4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -270,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/05/JavaScript忍者秘籍-第七章/" data-id="cjjqkane80008itv04h11zipz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/05/JavaScript忍者秘籍-第七章/" data-id="cjjts4xmj0009nmv0z1kahdh5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li></ul>
@@ -330,7 +402,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/算法-2/" data-id="cjjqkanf2000titv021bazvuy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/算法-2/" data-id="cjjts4xmw000rnmv0kzsi3lms" class="article-share-link">Share</a>
       
       
     </footer>
@@ -366,7 +438,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/KMP算法-1/" data-id="cjjqkanea000aitv06hqsuwpb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/KMP算法-1/" data-id="cjjts4xmi0008nmv08c68ms15" class="article-share-link">Share</a>
       
       
     </footer>
@@ -462,7 +534,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/算法(1)/" data-id="cjjqkanf1000sitv02r9cb542" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/算法(1)/" data-id="cjjts4xmv000pnmv0hwoeipiv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codefights/">codefights</a></li></ul>
@@ -509,7 +581,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/03/hello-world/" data-id="cjjqkanei000iitv0i3sq92o7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/03/hello-world/" data-id="cjjts4xmq000hnmv05txgau2u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -537,7 +609,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x/">Cocos2d-x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2dx-JS/">Cocos2dx-JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
     </div>
   </div>
 
@@ -547,7 +619,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/Cocos2d-x/" style="font-size: 10px;">Cocos2d-x</a> <a href="/tags/Cocos2dx-JS/" style="font-size: 10px;">Cocos2dx-JS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
     </div>
   </div>
 
@@ -569,6 +641,14 @@
       <ul>
         
           <li>
+            <a href="/2018/07/20/游戏开发协议-Protobuf/">游戏开发协议-Protobuf</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/Cocos2d-x绘制系统/">Cocos2d-x绘制系统</a>
+          </li>
+        
+          <li>
             <a href="/2018/07/18/Cocos2dx-JS学习01/">Cocos2dx-JS学习01</a>
           </li>
         
@@ -578,14 +658,6 @@
         
           <li>
             <a href="/2018/07/12/Cocos2d中的removeFromParent/">Cocos2d中的removeFromParent</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/09/WebSocket/">WebSocket</a>
-          </li>
-        
-          <li>
-            <a href="/2018/06/28/JS02作用域和执行上下文/">JS02作用域和执行上下文</a>
           </li>
         
       </ul>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>游戏开发协议-Protobuf | 李克兢</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简介Protocol Buffers就是一种google定义的结构化数据格式，用于数据的序列化和反序列化。由于它直接对二进制源数据进行操作，所以它相对于xml来说，足够的小，快以及简单，而且又与语言、平台无关，所以兼容性也有不错的表现。目前很适合做数据存储或 网络通讯间的数据传输。 操作 首先需要激活protoc命令，使用brew install protobuf安装  定义.proto文件“lo">
+<meta name="keywords" content="Cocos2dx-JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="游戏开发协议-Protobuf">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/游戏开发协议-Protobuf/index.html">
+<meta property="og:site_name" content="李克兢">
+<meta property="og:description" content="简介Protocol Buffers就是一种google定义的结构化数据格式，用于数据的序列化和反序列化。由于它直接对二进制源数据进行操作，所以它相对于xml来说，足够的小，快以及简单，而且又与语言、平台无关，所以兼容性也有不错的表现。目前很适合做数据存储或 网络通讯间的数据传输。 操作 首先需要激活protoc命令，使用brew install protobuf安装  定义.proto文件“lo">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/游戏开发协议-Protobuf/write01.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/游戏开发协议-Protobuf/read01.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/游戏开发协议-Protobuf/protobuf01.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/游戏开发协议-Protobuf/message01.png">
+<meta property="og:updated_time" content="2018-07-20T06:56:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="游戏开发协议-Protobuf">
+<meta name="twitter:description" content="简介Protocol Buffers就是一种google定义的结构化数据格式，用于数据的序列化和反序列化。由于它直接对二进制源数据进行操作，所以它相对于xml来说，足够的小，快以及简单，而且又与语言、平台无关，所以兼容性也有不错的表现。目前很适合做数据存储或 网络通讯间的数据传输。 操作 首先需要激活protoc命令，使用brew install protobuf安装  定义.proto文件“lo">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/20/游戏开发协议-Protobuf/write01.png">
+  
+    <link rel="alternate" href="/atom.xml" title="李克兢" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李克兢</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-游戏开发协议-Protobuf" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/20/游戏开发协议-Protobuf/" class="article-date">
+  <time datetime="2018-07-20T05:51:20.000Z" itemprop="datePublished">2018-07-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      游戏开发协议-Protobuf
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Protocol Buffers就是一种google定义的结构化数据格式，用于数据的序列化和反序列化。由于它直接对二进制源数据进行操作，所以它相对于xml来说，足够的小，快以及简单，而且又与语言、平台无关，所以兼容性也有不错的表现。目前很适合做数据存储或 网络通讯间的数据传输。</p>
+<h1 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h1><ol start="0">
+<li><p>首先需要激活protoc命令，使用brew install protobuf安装</p>
+</li>
+<li><p>定义.proto文件“login.proto”</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">syntax = &quot;proto3&quot;;</span><br><span class="line"></span><br><span class="line">package msg;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">option java_package = &quot;com.example.msg&quot;;</span><br><span class="line"></span><br><span class="line">option java_outer_classname = &quot;LoginMsg&quot;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">message Login&#123;</span><br><span class="line"></span><br><span class="line">    string username = 1;</span><br><span class="line"></span><br><span class="line">    int32 pw = 2;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译<code>protoc -I=. --java_out=.  login.proto</code></p>
+<p>生成了LoginMsg.java</p>
+</li>
+<li><p>对LoginMsg进行操作</p>
+<p>通过.proto定义生成的LoginMsg.java，已经整合了对LoginMsg的序列化和反序列化相关代码，我们对login这个消息的reader和writer时只需要通过对该class进行操作即可。比如要把loginMsg写入到流里面发送出去，只需要对loginMsg进行赋值然后writer，对象就被序列化为二进制数据写出，或者接收端读取LoginMsg时，调用其ParserbyReader,就可以基于二进制流反序列化为LoginMsg对象。</p>
+<p>write：</p>
+<img src="/2018/07/20/游戏开发协议-Protobuf/write01.png" title="This is an example image">
+<p>read：</p>
+<img src="/2018/07/20/游戏开发协议-Protobuf/read01.png" title="This is an example image">
+<p>只需要对上述的stream改造为为socket就可以基于tcp进行消息传输了。</p>
+<h2 id="LoginMsg内容"><a href="#LoginMsg内容" class="headerlink" title="LoginMsg内容"></a>LoginMsg内容</h2><h2 id="Login"><a href="#Login" class="headerlink" title="Login"></a>Login</h2><p>消息结构对象的主体，主要存储数据，同时继承GeneratedMessageV3，内部封装对象的序列化和反序列化，writeTo序列化，paser反序列化。</p>
+<h2 id="LoginOrBuilder"><a href="#LoginOrBuilder" class="headerlink" title="LoginOrBuilder"></a>LoginOrBuilder</h2><p>接口，用来连接Login和Builder，提供类型信息以及对外提供field get方法。</p>
+<h2 id="Builder"><a href="#Builder" class="headerlink" title="Builder"></a>Builder</h2><p>消息对象构建器，对外封装field set方法。</p>
+<h2 id="Descriptor"><a href="#Descriptor" class="headerlink" title="Descriptor"></a>Descriptor</h2><p>消息对象元数据的描述信息，一般用不到，如果你有动态解析的需求可以通过此来处理</p>
+<h2 id="Parser"><a href="#Parser" class="headerlink" title="Parser"></a>Parser</h2><p>解析器，为消息反序列化提供服务</p>
+</li>
+</ol>
+<p>结构关系如下:</p>
+<img src="/2018/07/20/游戏开发协议-Protobuf/protobuf01.png" title="This is an example image">
+<p>MessageLite/Message接口是所有message的抽象接口，message可以基于Parser从字节流数据中构建对象，也可以通过Builder创建的对象序列化后写入字节流数据到IO管道，MessageLite和Message内部都定义了自己的Builder类，继承自MessageLiteOrBuilder以及MessageOrBuiler，并定义了MessageLite/Message和它们各自Builder类的共同接口。</p>
+<h2 id="调用时序"><a href="#调用时序" class="headerlink" title="调用时序"></a>调用时序</h2><p>。。。</p>
+<p>内容搬运<a href="https://www.jianshu.com/p/9cb9fb05431a" target="_blank" rel="noopener">https://www.jianshu.com/p/9cb9fb05431a</a></p>
+<p><a href="https://www.jianshu.com/p/ec39f79c0412" target="_blank" rel="noopener">https://www.jianshu.com/p/ec39f79c0412</a></p>
+<h1 id="JavaScript版本"><a href="#JavaScript版本" class="headerlink" title="JavaScript版本"></a>JavaScript版本</h1><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">syntax = &quot;proto3&quot;;</span><br><span class="line">message Login&#123;</span><br><span class="line"></span><br><span class="line">    string username = 1;</span><br><span class="line"></span><br><span class="line">    int32 pw = 2;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行<code>protoc -I=. --js_out=.  login.proto</code>即可以产生js版本的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @fileoverview</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @enhanceable</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @suppress &#123;messageConventions&#125; JS Compiler reports an error if a variable or</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \*     field starts with 'MSG_' and isn't a translatable message.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @public</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// GENERATED CODE -- DO NOT EDIT!</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">goog.provide(<span class="string">'proto.Login'</span>);</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">goog.require(<span class="string">'jspb.BinaryReader'</span>);</span><br><span class="line"></span><br><span class="line">goog.require(<span class="string">'jspb.BinaryWriter'</span>);</span><br><span class="line"></span><br><span class="line">goog.require(<span class="string">'jspb.Message'</span>);</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* Generated by JsPbCodeGenerator.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @param &#123;Array=&#125; opt_data Optional initial data array, typically from a</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* server response, or constructed directly in Javascript. The array is used</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* in place and becomes part of the constructed object. It is not cloned.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* If no data is provided, the constructed object will be empty, but still</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* valid.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @extends &#123;jspb.Message&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @constructor</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">proto.Login = <span class="function"><span class="keyword">function</span>(<span class="params">opt_data</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  jspb.Message.initialize(<span class="keyword">this</span>, opt_data, <span class="number">0</span>, <span class="number">-1</span>, <span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">goog.inherits(proto.Login, jspb.Message);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (goog.DEBUG &amp;&amp; !COMPILED) &#123;</span><br><span class="line"></span><br><span class="line">  proto.Login.displayName = <span class="string">'proto.Login'</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (jspb.Message.GENERATE_TO_OBJECT) &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* Creates an object representation of this proto suitable for use in Soy templates.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* Field names that are reserved in JavaScript and will be renamed to pb_name.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* To access a reserved field use, foo.pb_&lt;name&gt;, eg, foo.pb_default.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* For the list of reserved names please see:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \*     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @param &#123;boolean=&#125; opt_includeInstance Whether to include the JSPB instance</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \*     for transitional soy proto support: http://goto/soy-param-migration</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @return &#123;!Object&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">proto.Login.prototype.toObject = <span class="function"><span class="keyword">function</span>(<span class="params">opt_includeInstance</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> proto.Login.toObject(opt_includeInstance, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* Static version of the &#123;@see toObject&#125; method.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @param &#123;boolean|undefined&#125; includeInstance Whether to include the JSPB</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \*     instance for transitional soy proto support:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \*     http://goto/soy-param-migration</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @param &#123;!proto.Login&#125; msg The msg instance to transform.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @return &#123;!Object&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @suppress &#123;unusedLocalVariables&#125; f is only used for nested messages</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">proto.Login.toObject = <span class="function"><span class="keyword">function</span>(<span class="params">includeInstance, msg</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> f, obj = &#123;</span><br><span class="line"></span><br><span class="line">    username: jspb.Message.getFieldWithDefault(msg, <span class="number">1</span>, <span class="string">""</span>),</span><br><span class="line"></span><br><span class="line">    pw: jspb.Message.getFieldWithDefault(msg, <span class="number">2</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (includeInstance) &#123;</span><br><span class="line"></span><br><span class="line">    obj.$jspbMessageInstance = msg;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* Deserializes binary data (in protobuf wire format).</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @param &#123;jspb.ByteSource&#125; bytes The bytes to deserialize.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @return &#123;!proto.Login&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">proto.Login.deserializeBinary = <span class="function"><span class="keyword">function</span>(<span class="params">bytes</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> reader = <span class="keyword">new</span> jspb.BinaryReader(bytes);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> msg = <span class="keyword">new</span> proto.Login;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> proto.Login.deserializeBinaryFromReader(msg, reader);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* Deserializes binary data (in protobuf wire format) from the</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* given reader into the given message object.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @param &#123;!proto.Login&#125; msg The message object to deserialize into.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @param &#123;!jspb.BinaryReader&#125; reader The BinaryReader to use.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @return &#123;!proto.Login&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">proto.Login.deserializeBinaryFromReader = <span class="function"><span class="keyword">function</span>(<span class="params">msg, reader</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (reader.nextField()) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (reader.isEndGroup()) &#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> field = reader.getFieldNumber();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (field) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> value = <span class="comment">/** @type &#123;string&#125; */</span> (reader.readString());</span><br><span class="line"></span><br><span class="line">      msg.setUsername(value);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> value = <span class="comment">/** @type &#123;number&#125; */</span> (reader.readInt32());</span><br><span class="line"></span><br><span class="line">      msg.setPw(value);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line"></span><br><span class="line">      reader.skipField();</span><br><span class="line"></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> msg;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* Serializes the message to binary data (in protobuf wire format).</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @return &#123;!Uint8Array&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">proto.Login.prototype.serializeBinary = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> writer = <span class="keyword">new</span> jspb.BinaryWriter();</span><br><span class="line"></span><br><span class="line">  proto.Login.serializeBinaryToWriter(<span class="keyword">this</span>, writer);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> writer.getResultBuffer();</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* Serializes the given message to binary data (in protobuf wire</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* format), writing to the given BinaryWriter.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @param &#123;!proto.Login&#125; message</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @param &#123;!jspb.BinaryWriter&#125; writer</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @suppress &#123;unusedLocalVariables&#125; f is only used for nested messages</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">proto.Login.serializeBinaryToWriter = <span class="function"><span class="keyword">function</span>(<span class="params">message, writer</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> f = <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line">  f = message.getUsername();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (f.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">    writer.writeString(</span><br><span class="line"></span><br><span class="line">      <span class="number">1</span>,</span><br><span class="line"></span><br><span class="line">      f</span><br><span class="line"></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  f = message.getPw();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (f !== <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">    writer.writeInt32(</span><br><span class="line"></span><br><span class="line">      <span class="number">2</span>,</span><br><span class="line"></span><br><span class="line">      f</span><br><span class="line"></span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* optional string username = 1;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">proto.Login.prototype.getUsername = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="comment">/** @type &#123;string&#125; */</span> (jspb.Message.getFieldWithDefault(<span class="keyword">this</span>, <span class="number">1</span>, <span class="string">""</span>));</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">/** @param &#123;string&#125; value */</span></span><br><span class="line"></span><br><span class="line">proto.Login.prototype.setUsername = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  jspb.Message.setProto3StringField(<span class="keyword">this</span>, <span class="number">1</span>, value);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* optional int32 pw = 2;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> \* @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">proto.Login.prototype.getPw = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="comment">/** @type &#123;number&#125; */</span> (jspb.Message.getFieldWithDefault(<span class="keyword">this</span>, <span class="number">2</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">/** @param &#123;number&#125; value */</span></span><br><span class="line"></span><br><span class="line">proto.Login.prototype.setPw = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  jspb.Message.setProto3IntField(<span class="keyword">this</span>, <span class="number">2</span>, value);</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p> 代码结构要简单的多，主要调用的是jspb库。</p>
+<p>很容易看出来，fieldNumber很重要，所以在前后端更新协议的时候，往后面加，而不是在中间插</p>
+<h2 id="message的二进制结构"><a href="#message的二进制结构" class="headerlink" title="message的二进制结构"></a>message的二进制结构</h2><img src="/2018/07/20/游戏开发协议-Protobuf/message01.png" title="This is an example image">
+<p>每个消息字段读取的时候，都会先调用一次readTag或者writeTag。tag等于就是这个value信息的描述或者定义，告知解析器当前fields是什么类型字段，以及读取的顺序，有了这个信息，解析器就知道一个field在流中的开始位置和结束位置，如此一个field解码成功，并且与字段顺序无关。</p>
+<h3 id="tag的构成"><a href="#tag的构成" class="headerlink" title="tag的构成"></a>tag的构成</h3><p><code>(fieldNumber &lt;&lt; 3) | wireType</code></p>
+<h1 id="Protobuf的优点"><a href="#Protobuf的优点" class="headerlink" title="Protobuf的优点"></a>Protobuf的优点</h1><p>fieldNumber 为每个field定义一个编号，其一保证不重复，其二保证其在流中的位置。如若当前数据流中有某个字段，而解析方没有相关的解析代码，解析放会直接skip 这个field，而且读数据的position也会后移，保证后续读取不出问题。</p>
+<h1 id="cautions"><a href="#cautions" class="headerlink" title="cautions"></a>cautions</h1><p>proto文件要使用UTF-8</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/20/游戏开发协议-Protobuf/" data-id="cjjts4xnc000znmv08821s0ub" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cocos2dx-JS/">Cocos2dx-JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/18/Cocos2d-x绘制系统/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Cocos2d-x绘制系统</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x/">Cocos2d-x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2dx-JS/">Cocos2dx-JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/Cocos2d-x/" style="font-size: 10px;">Cocos2d-x</a> <a href="/tags/Cocos2dx-JS/" style="font-size: 10px;">Cocos2dx-JS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/网络/" style="font-size: 10px;">网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/20/游戏开发协议-Protobuf/">游戏开发协议-Protobuf</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/Cocos2d-x绘制系统/">Cocos2d-x绘制系统</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/Cocos2dx-JS学习01/">Cocos2dx-JS学习01</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/18/JS隐式转换/">JS隐式转换</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/12/Cocos2d中的removeFromParent/">Cocos2d中的removeFromParent</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 kjlist<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

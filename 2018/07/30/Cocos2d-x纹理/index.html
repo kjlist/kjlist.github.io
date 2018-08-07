@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Cocos2d-x纹理 | 李克兢</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="3D图形渲染最重要的工作之一是将纹理应用到物体表面，这个过程主要发生在片段着色器工作的阶段，使用光栅化阶段插值计算得出的纹理坐标从纹理中采样，然后对片段进行着色，可以处理丰富的特效，如光照、阴影等。 对纹理进行各个层面的优化是一项重要的工作，我们需要知道关于纹理的一切内容，才能知道应该从哪方面以及怎样对其进行优化。 在Cocos2d-x中主要通过Texture2D类来创造和管理OpenGL ES">
+<meta name="keywords" content="Cocos2d-x OpenGL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d-x纹理">
+<meta property="og:url" content="http://yoursite.com/2018/07/30/Cocos2d-x纹理/index.html">
+<meta property="og:site_name" content="李克兢">
+<meta property="og:description" content="3D图形渲染最重要的工作之一是将纹理应用到物体表面，这个过程主要发生在片段着色器工作的阶段，使用光栅化阶段插值计算得出的纹理坐标从纹理中采样，然后对片段进行着色，可以处理丰富的特效，如光照、阴影等。 对纹理进行各个层面的优化是一项重要的工作，我们需要知道关于纹理的一切内容，才能知道应该从哪方面以及怎样对其进行优化。 在Cocos2d-x中主要通过Texture2D类来创造和管理OpenGL ES">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-31T01:45:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d-x纹理">
+<meta name="twitter:description" content="3D图形渲染最重要的工作之一是将纹理应用到物体表面，这个过程主要发生在片段着色器工作的阶段，使用光栅化阶段插值计算得出的纹理坐标从纹理中采样，然后对片段进行着色，可以处理丰富的特效，如光照、阴影等。 对纹理进行各个层面的优化是一项重要的工作，我们需要知道关于纹理的一切内容，才能知道应该从哪方面以及怎样对其进行优化。 在Cocos2d-x中主要通过Texture2D类来创造和管理OpenGL ES">
+  
+    <link rel="alternate" href="/atom.xml" title="李克兢" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李克兢</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Cocos2d-x纹理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/30/Cocos2d-x纹理/" class="article-date">
+  <time datetime="2018-07-30T01:32:01.000Z" itemprop="datePublished">2018-07-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Cocos2d-x纹理
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>3D图形渲染最重要的工作之一是将纹理应用到物体表面，这个过程主要发生在片段着色器工作的阶段，使用光栅化阶段插值计算得出的纹理坐标从纹理中采样，然后对片段进行着色，可以处理丰富的特效，如光照、阴影等。</p>
+<p>对纹理进行各个层面的优化是一项重要的工作，我们需要知道关于纹理的一切内容，才能知道应该从哪方面以及怎样对其进行优化。</p>
+<p>在Cocos2d-x中主要通过Texture2D类来创造和管理OpenGL ES 纹理。</p>
+<h1 id="光栅化"><a href="#光栅化" class="headerlink" title="光栅化"></a>光栅化</h1><p>光栅化阶段用于将投影到2D屏幕上的图元转换为帧缓冲中整数坐标位置上的片段，每个片段都会包含颜色、深度和模板值。每个片段的颜色值由片段着色器决定，片段着色器会使用光栅化生成的一些易变变量（Varying）</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>首先确定视窗上哪些整数的片段需要被图元覆盖</p>
+<p>对图元进行插值运算，得出每个片段的颜色和深度，这些数据送入片段操作进行处理，最后的结果将用于更新帧缓冲上该位置的信息。</p>
+<h1 id="多重采样"><a href="#多重采样" class="headerlink" title="多重采样"></a>多重采样</h1><h2 id="反锯齿"><a href="#反锯齿" class="headerlink" title="反锯齿"></a>反锯齿</h2><p>也称抗锯齿和边缘柔化，是一种用于消除显示器输出的画面中图像边缘出现锯齿的技术。锯齿通常是因为高分辨率信号以低分辨率显示或者无法准确计算出3D图形左边是导致的图形混叠而产生的。</p>
+<p>使用多重采样技术解决这个问题，帧缓冲上的每个像素基于附近多个位置的采样共同决定的一个颜色值，使用而外的多重采样缓冲区来存储这些额外采样点的颜色、深度和模板值</p>
+<p>默认cocos不开启，手动修改CCEAGLView初始化的multiSampling参数来开启</p>
+<p>在开启多重采样之后，缓冲区的像素信息不再被存储到帧缓冲中，而是被存储到一个特殊的多重采样的缓冲区中,注意，多重采样只是针对多边形的边缘进行抗锯齿处理，对应用程序性能的影响相对较小，</p>
+<h2 id="纹理坐标"><a href="#纹理坐标" class="headerlink" title="纹理坐标"></a>纹理坐标</h2><p>纹理坐标以纹理的左下角为左边原点，两种度量形式：一个顶点在纹理中的纹理坐标通常用(u,v)表示，u和v的最大值分别是纹理的宽度和高度，它的值通常由客户端应用程序提供，在片段着色器中使用的片段纹理坐标通常用(s,t)表示，其取值范围为(0.0,0.0)~(1.0,1.0)。这一规化过程是在光栅化阶段完成的</p>
+<p>##像素矩形</p>
+<p>它表示一个矩形区域的二维像素数组，它可以用来表示一个矩形区域的颜色、深度或者模板值</p>
+<p>存储颜色值的像素矩形可以通过TexImage2D及其相关命令定义，并将数据由客户端内存中传输至GL服务端内存中，或者通过ReadPixels及相关命令将数据从帧缓冲区中读取到客户端内存中，其中将客户端的颜色数据传输到GL服务端的过程称为解包（Unpack）,而与之相反，将服务端像素矩形中的像素数据读取到客户端的过程称为打包（Pack）。</p>
+<p>通过TexImage2D及相关命令定义的像素矩形称为纹理。纹理由纹理像素组成，简称纹素。一个2D纹理由一个二维的纹素数组组成，纹理的宽度表示列数，高度表示数组的行数，数组中的第一个元素表示纹理左下角的像素点</p>
+<h3 id="纹理数据的传输"><a href="#纹理数据的传输" class="headerlink" title="纹理数据的传输"></a>纹理数据的传输</h3><p>##客户端图像格式</p>
+<p>在将纹理传输到GL服务端以供片段着色器等使用时，我们必须指明纹理在服务端以怎样的方式存储，这需要通过TexImage2D等命令来设置。</p>
+<h2 id="纹理对象和加载纹理"><a href="#纹理对象和加载纹理" class="headerlink" title="纹理对象和加载纹理"></a>纹理对象和加载纹理</h2><p>在绘图管线中，纹理主要在片段着色器中被使用。每一次绘制命令（glDrawArray或者glDrawElements）执行时，需要告诉OpenGL ES当前管线中使用的一个或者多个纹理，这涉及管理纹理对象，绑定当前纹理对象，将纹理数据加载到OpenGL ES内存中等命令操作。</p>
+<p>一个纹理对象是一个容器，它持有该纹理被使用时需要用到的所有数据，包括图像像素数据、过滤模式、拓展模式等。在OpenGL ES中，用一个无符号整数表示该纹理对象的名称，纹理对象用glGenTextures命令创建</p>
+<p>创建之后，必须绑定才能操作，在这里OpenGL ES通过设定当前纹理对象对其进行操作，设定当前纹理对象之后，后续（直到纹理对象被删除或者下一个纹理绑定命令被执行之前）的操作将作用在该纹理对象上。glBindTexture命令</p>
+<p>glTexImage2D命令加载纹理。一旦该命令执行，会立即将图像像素数据从客户端传输到服务端内存中，后续对客户端数据的修改不会影响OpenGL ES中绑定的纹理数据。因此，客户端在将数据加载到OpenGL ES内存中之后，应该立即删除客户端中的缓存对象。</p>
+<h1 id="纹理缓存管理"><a href="#纹理缓存管理" class="headerlink" title="纹理缓存管理"></a>纹理缓存管理</h1><p>我们可以通过选择适当的图片格式，或者使用压缩纹理来减少纹理对内存的占用。</p>
+<p>纹理缓存系统的主要目标是使只有当前场景需要显示的纹理驻留在内存中，开发者的职责则是要定义哪些是当前场景需要使用的资源。另外，在纹理使用期间，它应该只被创建一次，并且避免动态加载纹理，我们始终应该在进入一个场景时预加载相关纹理，这是一个耗时的操作，而且是在主线程中完成的。</p>
+<h3 id="纹理的生命周期"><a href="#纹理的生命周期" class="headerlink" title="纹理的生命周期"></a>纹理的生命周期</h3><p>在Cocos2d-x中，一个Texture2D实例对应OpenGL ES中的一张纹理，initWithMipmaps ()方法。</p>
+<p>每个Texture2D实例在未被销毁之前，GPU会一直缓存该纹理对象。如果销毁Texture2D，则会删除对应的纹理对象。</p>
+<p>TextureCache提供了对Texture2D对象的更好的管理方式</p>
+<p>##TextureCache</p>
+<p>TextureCache最终要的功能是为每个纹理的Texture2D对象创建一个索引键，索引键主要有两类：当使用文件名创建纹理的时候，文件所在全路径成为索引键。也可以手动给通过Image创建的纹理分配一个指定的索引键</p>
+<p>使用addImageAsync()方法异步加载纹理，通常用在进入一个新场景里面，使用一个加载页面</p>
+<p>TextureCache管理下的纹理的生命周期</p>
+<p>没有TextureCache的情况下，直接通过string、image或者data创建一个Texture2D对象，这时该对象的引用计数为1.用该对象构建一个Sprite元素，Sprite元素首先对它进行retain以确保纹理对象不被删除，并在被移出场景的时候release，此时Texture2D的生命周期取决于我们是否还要继续使用它。但是无论如何，我们都需要记住每个Texture2D对象对应哪一张图片，而且要让这些独立的Texture2D对象在其他的类中被使用要费一般周折</p>
+<p>TextureCache中的每个Texture2D对象的引用计数是1，如果有元素正在使用该纹理，则引用计数为正在使用的元素个数加1.1表示空闲状态，使用removeUnusedTextures()方法来移除空闲的纹理以释放资源。</p>
+<p>如果确认某个纹理不再使用，removeTexture()，这时Texture2D对象将执行一次release</p>
+<h2 id="场景过度中的资源管理"><a href="#场景过度中的资源管理" class="headerlink" title="场景过度中的资源管理"></a>场景过度中的资源管理</h2><h4 id="基于引用计数的资源管理"><a href="#基于引用计数的资源管理" class="headerlink" title="基于引用计数的资源管理"></a>基于引用计数的资源管理</h4><p>计数指的是应用程序在逻辑上使用哪些资源</p>
+<h4 id="更好的场景过度资源管理"><a href="#更好的场景过度资源管理" class="headerlink" title="更好的场景过度资源管理"></a>更好的场景过度资源管理</h4><p>Cocos2d-x没有提供场景或者关卡层面上的资源管理方案。</p>
+<p>ResourceManager负责逻辑上的资源引用计数管理。记录每个资源在场景中的引用情况。应用程序只需要和ResourceManager进行交互。</p>
+<p>ResourceManager主要作用是解决场景之间的资源共享</p>
+<h2 id="纹理所占内存的计算"><a href="#纹理所占内存的计算" class="headerlink" title="纹理所占内存的计算"></a>纹理所占内存的计算</h2><h2 id="使用纹理的最佳实践"><a href="#使用纹理的最佳实践" class="headerlink" title="使用纹理的最佳实践"></a>使用纹理的最佳实践</h2><h3 id="硬件层面"><a href="#硬件层面" class="headerlink" title="硬件层面"></a>硬件层面</h3><p>一般通过引擎完成</p>
+<h3 id="程序层面"><a href="#程序层面" class="headerlink" title="程序层面"></a>程序层面</h3><p>首先，始终提前加载资源，避免在游戏运行中动态加载资源</p>
+<p>其次，减少纹理的内存占用，实时释放那些不再被使用的纹理资源，这要求开发者必须清楚地定义每个资源的生命周期</p>
+<p>再次，我们应该将一些小的碎片纹理合成一张大的纹理</p>
+<p>第四，使用多级纹理减少内存的占用。对于一些低分辨率的设备，仅上传对应级别的多级纹理</p>
+<p>第五，使员工多重纹理，对于一些复杂的UI元素，开发者通常会选择绘制多次，每次单独使用一个纹理，这使得绘制次数增加，占用更多的时间（多次绘制串行执行），以及重复的顶点数据的传输和读取。使用多级纹理一次性将所有问哦李传入进一个渲染管线</p>
+<p>最后，使用Alpha预乘来减少透明纹理在场景混合时的计算量</p>
+<h3 id="资源层面"><a href="#资源层面" class="headerlink" title="资源层面"></a>资源层面</h3><p>选择适当的资源格式</p>
+<p>设置正确的defaultAlphaPixelFormat将不同格式的纹理上传GL内存</p>
+<p>使用压缩纹理</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/30/Cocos2d-x纹理/" data-id="cjkj0cqpb000s8gv055vj5jzb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cocos2d-x-OpenGL/">Cocos2d-x OpenGL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/31/Cocos2d-x精灵/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Cocos2d-x精灵
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/28/Cocos2d-x的优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Cocos2d-x的优化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x/">Cocos2d-x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x-OpenGL/">Cocos2d-x OpenGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x-优化/">Cocos2d-x 优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2dx-JS/">Cocos2dx-JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/Cocos2d-x/" style="font-size: 10px;">Cocos2d-x</a> <a href="/tags/Cocos2d-x-OpenGL/" style="font-size: 15px;">Cocos2d-x OpenGL</a> <a href="/tags/Cocos2d-x-优化/" style="font-size: 10px;">Cocos2d-x 优化</a> <a href="/tags/Cocos2dx-JS/" style="font-size: 10px;">Cocos2dx-JS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/网络/" style="font-size: 20px;">网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/06/ES-1/">ES-1</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/31/Cocos2d-x精灵/">Cocos2d-x精灵</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/30/Cocos2d-x纹理/">Cocos2d-x纹理</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/28/Cocos2d-x的优化/">Cocos2d-x的优化</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/27/网络-TCP/">网络-TCP</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 kjlist<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

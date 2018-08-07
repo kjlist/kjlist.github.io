@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Cocos2d-x精灵 | 李克兢</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在Cocos2d-x中，精灵用Sprite类表示，它将一张纹理的一部分或者全部矩形区域绘制在屏幕上。我们可以使用精灵表来减少OpenGL ES绘制的次数 Sprite实现了TextureProtocol接口通过指定一张纹理及该纹理上的一个区域，就可以创建一个Sprite对象。 我们可以通过setTexture方法来动态修改Sprite关联的纹理，从而实现精灵动画。也可以使用SpriteFrame来">
+<meta name="keywords" content="Cocos2d-x OpenGL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d-x精灵">
+<meta property="og:url" content="http://yoursite.com/2018/07/31/Cocos2d-x精灵/index.html">
+<meta property="og:site_name" content="李克兢">
+<meta property="og:description" content="在Cocos2d-x中，精灵用Sprite类表示，它将一张纹理的一部分或者全部矩形区域绘制在屏幕上。我们可以使用精灵表来减少OpenGL ES绘制的次数 Sprite实现了TextureProtocol接口通过指定一张纹理及该纹理上的一个区域，就可以创建一个Sprite对象。 我们可以通过setTexture方法来动态修改Sprite关联的纹理，从而实现精灵动画。也可以使用SpriteFrame来">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-06T03:14:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d-x精灵">
+<meta name="twitter:description" content="在Cocos2d-x中，精灵用Sprite类表示，它将一张纹理的一部分或者全部矩形区域绘制在屏幕上。我们可以使用精灵表来减少OpenGL ES绘制的次数 Sprite实现了TextureProtocol接口通过指定一张纹理及该纹理上的一个区域，就可以创建一个Sprite对象。 我们可以通过setTexture方法来动态修改Sprite关联的纹理，从而实现精灵动画。也可以使用SpriteFrame来">
+  
+    <link rel="alternate" href="/atom.xml" title="李克兢" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李克兢</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Cocos2d-x精灵" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/31/Cocos2d-x精灵/" class="article-date">
+  <time datetime="2018-07-31T09:22:39.000Z" itemprop="datePublished">2018-07-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Cocos2d-x精灵
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Cocos2d-x中，精灵用Sprite类表示，它将一张纹理的一部分或者全部矩形区域绘制在屏幕上。我们可以使用精灵表来减少OpenGL ES绘制的次数</p>
+<p>Sprite实现了TextureProtocol接口通过指定一张纹理及该纹理上的一个区域，就可以创建一个Sprite对象。</p>
+<p>我们可以通过setTexture方法来动态修改Sprite关联的纹理，从而实现精灵动画。也可以使用SpriteFrame来高效地播放精灵动画。setTexture方法对新的texture执行retain操作，增加其引用计数</p>
+<p>所有对Sprite绘制属性的修改（混合模式除外）最终都表现为对一个结构体类型变量quad的修改。</p>
+<p>它用来记录一个矩形图元的4个顶点的顶点属性。由于OpenGL ES不支持多边形图元，实际是两个三角形</p>
+<p>可以通过颜色混合和颜色叠加来影响OpenGL ES的绘制结果</p>
+<p>颜色混合用来指定当前Sprite与颜色缓冲区中相同位置颜色值的混合方式。</p>
+<h1 id="精灵表"><a href="#精灵表" class="headerlink" title="精灵表"></a>精灵表</h1><p>利用精灵表，我们可以对同一次绘制指定更多的顶点来减少绘制次数</p>
+<p>SpriteFrameCache加载精灵表，缓存每一个精灵的信息。SpriteFrameCache通过解析配置文件将精灵表中的每个精灵存储为一个SpriteFrame对象，可以通过SpriteFrame创建一个Sprite</p>
+<p>并不提供移除对应于Texture2D对象的功能。因为一个Texture2D对象可能被其他非SpriteFrame对象引用，所以，如果我们确定一个精灵表不再被使用，还应该移除对应的Texture2D对象</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/31/Cocos2d-x精灵/" data-id="cjkj0cqo300008gv0xd8p4omi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cocos2d-x-OpenGL/">Cocos2d-x OpenGL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/06/ES-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ES-1
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/30/Cocos2d-x纹理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Cocos2d-x纹理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x/">Cocos2d-x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x-OpenGL/">Cocos2d-x OpenGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x-优化/">Cocos2d-x 优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2dx-JS/">Cocos2dx-JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/Cocos2d-x/" style="font-size: 10px;">Cocos2d-x</a> <a href="/tags/Cocos2d-x-OpenGL/" style="font-size: 15px;">Cocos2d-x OpenGL</a> <a href="/tags/Cocos2d-x-优化/" style="font-size: 10px;">Cocos2d-x 优化</a> <a href="/tags/Cocos2dx-JS/" style="font-size: 10px;">Cocos2dx-JS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/网络/" style="font-size: 20px;">网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/06/ES-1/">ES-1</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/31/Cocos2d-x精灵/">Cocos2d-x精灵</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/30/Cocos2d-x纹理/">Cocos2d-x纹理</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/28/Cocos2d-x的优化/">Cocos2d-x的优化</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/27/网络-TCP/">网络-TCP</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 kjlist<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

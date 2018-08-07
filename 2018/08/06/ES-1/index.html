@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ES-1 | 李克兢</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="OpenGL ES的主要作用是将3D场景绘制到2D屏幕上，在图形学中，这一过程通过一系列的渲染管线完成。 API就是用来向各个阶段提供一些数据和状态指令，以使渲染管线能够按照要求正确地将物体绘制在屏幕上的。 左边的客户端程序通过调用OpenGL ES接口，将顶点、着色器程序，纹理，以及其他GL状态参数传入右边的GL服务端，然后在客户端调用绘制命令（如DrawArray），GL便会对输入的图元逐一执">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES-1">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/ES-1/index.html">
+<meta property="og:site_name" content="李克兢">
+<meta property="og:description" content="OpenGL ES的主要作用是将3D场景绘制到2D屏幕上，在图形学中，这一过程通过一系列的渲染管线完成。 API就是用来向各个阶段提供一些数据和状态指令，以使渲染管线能够按照要求正确地将物体绘制在屏幕上的。 左边的客户端程序通过调用OpenGL ES接口，将顶点、着色器程序，纹理，以及其他GL状态参数传入右边的GL服务端，然后在客户端调用绘制命令（如DrawArray），GL便会对输入的图元逐一执">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-06T08:07:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES-1">
+<meta name="twitter:description" content="OpenGL ES的主要作用是将3D场景绘制到2D屏幕上，在图形学中，这一过程通过一系列的渲染管线完成。 API就是用来向各个阶段提供一些数据和状态指令，以使渲染管线能够按照要求正确地将物体绘制在屏幕上的。 左边的客户端程序通过调用OpenGL ES接口，将顶点、着色器程序，纹理，以及其他GL状态参数传入右边的GL服务端，然后在客户端调用绘制命令（如DrawArray），GL便会对输入的图元逐一执">
+  
+    <link rel="alternate" href="/atom.xml" title="李克兢" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李克兢</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ES-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/06/ES-1/" class="article-date">
+  <time datetime="2018-08-06T07:32:12.000Z" itemprop="datePublished">2018-08-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES-1
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>OpenGL ES的主要作用是将3D场景绘制到2D屏幕上，在图形学中，这一过程通过一系列的渲染管线完成。</p>
+<p>API就是用来向各个阶段提供一些数据和状态指令，以使渲染管线能够按照要求正确地将物体绘制在屏幕上的。</p>
+<p>左边的客户端程序通过调用OpenGL ES接口，将顶点、着色器程序，纹理，以及其他GL状态参数传入右边的GL服务端，然后在客户端调用绘制命令（如DrawArray），GL便会对输入的图元逐一执行渲染管线的每个阶段，然后将每个像素的颜色值写入帧缓冲中，最后，视窗系统就可以将帧缓冲中的颜色值显示在屏幕上了。</p>
+<p>顶点着色器和片段着色器是可编程的过程</p>
+<h2 id="顶点数组"><a href="#顶点数组" class="headerlink" title="顶点数组"></a>顶点数组</h2><p>在传入OpenGL ES之前，应用程序应该将3D模型转换成一组图元的集合。每个图元都是一个点、线段或者三角形。每个图元由一个或者多个顶点组成，每个顶点定义一个点，一条边的一端或者三角形的一个角。每个顶点关联一些数据，这些数据包括顶点坐标、颜色法线向量，纹理坐标</p>
+<p>通过顶点缓冲对象(vbo)绑定顶点数组,</p>
+<h2 id="顶点着色器"><a href="#顶点着色器" class="headerlink" title="顶点着色器"></a>顶点着色器</h2><p>顶点着色器可以使用顶点数据来计算该顶点的坐标、颜色、光照、纹理坐标等。顶点坐标最重要的任务是执行顶点坐标变换，将本地坐标转换为裁剪坐标系的坐标值。顶点着色器用于输出顶点在裁剪坐标系中的坐标的变量为gl_Position。</p>
+<p>另一个功能是向后面的片段着色器提供一组Varing变量</p>
+<h2 id="图元装配"><a href="#图元装配" class="headerlink" title="图元装配"></a>图元装配</h2><h2 id="光栅化"><a href="#光栅化" class="headerlink" title="光栅化"></a>光栅化</h2><p>对图元中的片段进行采样，以决定哪些片段位于图元之内。在计算出每个片段的坐标值之后，片段着色器就能使用这个坐标值对该片段进行着色了，这个片段为最终屏幕上的一个像素点</p>
+<h2 id="片段着色器"><a href="#片段着色器" class="headerlink" title="片段着色器"></a>片段着色器</h2><p>主要作用是计算每一个片段的颜色值</p>
+<h2 id="片段测试"><a href="#片段测试" class="headerlink" title="片段测试"></a>片段测试</h2><p>像素所有权测试，裁剪测试，模板测试，深度测试，混合，抖动</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/06/ES-1/" data-id="cjkj0cqoc00038gv0hh3w200o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/31/Cocos2d-x精灵/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Cocos2d-x精灵</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x/">Cocos2d-x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x-OpenGL/">Cocos2d-x OpenGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x-优化/">Cocos2d-x 优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2dx-JS/">Cocos2dx-JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/Cocos2d-x/" style="font-size: 10px;">Cocos2d-x</a> <a href="/tags/Cocos2d-x-OpenGL/" style="font-size: 15px;">Cocos2d-x OpenGL</a> <a href="/tags/Cocos2d-x-优化/" style="font-size: 10px;">Cocos2d-x 优化</a> <a href="/tags/Cocos2dx-JS/" style="font-size: 10px;">Cocos2dx-JS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/网络/" style="font-size: 20px;">网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/06/ES-1/">ES-1</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/31/Cocos2d-x精灵/">Cocos2d-x精灵</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/30/Cocos2d-x纹理/">Cocos2d-x纹理</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/28/Cocos2d-x的优化/">Cocos2d-x的优化</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/27/网络-TCP/">网络-TCP</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 kjlist<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

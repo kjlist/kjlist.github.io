@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Cocos2d-x的优化 | 李克兢</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Cocos2d-JS对象缓存池###简介 对于频繁创建和销毁的对象（如子弹、敌人）使用cc.pool对象。 注：使用cc.pool之前需要在project.json的modules数组中添加ccpool项 ###使用  让类支持cc.pool管理：类必须实现reuse和unuse方法。因为对象的缓存通过cc.pool.putInPool(object)函数实现，该函数会调用该对象的unuse方法。">
+<meta name="keywords" content="Cocos2d-x 优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d-x的优化">
+<meta property="og:url" content="http://yoursite.com/2018/07/28/Cocos2d-x的优化/index.html">
+<meta property="og:site_name" content="李克兢">
+<meta property="og:description" content="Cocos2d-JS对象缓存池###简介 对于频繁创建和销毁的对象（如子弹、敌人）使用cc.pool对象。 注：使用cc.pool之前需要在project.json的modules数组中添加ccpool项 ###使用  让类支持cc.pool管理：类必须实现reuse和unuse方法。因为对象的缓存通过cc.pool.putInPool(object)函数实现，该函数会调用该对象的unuse方法。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-28T03:21:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d-x的优化">
+<meta name="twitter:description" content="Cocos2d-JS对象缓存池###简介 对于频繁创建和销毁的对象（如子弹、敌人）使用cc.pool对象。 注：使用cc.pool之前需要在project.json的modules数组中添加ccpool项 ###使用  让类支持cc.pool管理：类必须实现reuse和unuse方法。因为对象的缓存通过cc.pool.putInPool(object)函数实现，该函数会调用该对象的unuse方法。">
+  
+    <link rel="alternate" href="/atom.xml" title="李克兢" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">李克兢</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Cocos2d-x的优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/28/Cocos2d-x的优化/" class="article-date">
+  <time datetime="2018-07-28T02:16:15.000Z" itemprop="datePublished">2018-07-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Cocos2d-x的优化
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Cocos2d-JS"><a href="#Cocos2d-JS" class="headerlink" title="Cocos2d-JS"></a>Cocos2d-JS</h1><h2 id="对象缓存池"><a href="#对象缓存池" class="headerlink" title="对象缓存池"></a>对象缓存池</h2><p>###简介</p>
+<p>对于频繁创建和销毁的对象（如子弹、敌人）使用cc.pool对象。</p>
+<p>注：使用cc.pool之前需要在project.json的modules数组中添加ccpool项</p>
+<p>###使用</p>
+<ol>
+<li>让类支持cc.pool管理：类必须实现reuse和unuse方法。因为对象的缓存通过cc.pool.putInPool(object)函数实现，该函数会调用该对象的unuse方法。一般情况下，在unuse方法中完成对象被放入缓冲池前的操作。</li>
+<li>预备工作：首次创建好一定量的对象，并把他们放入缓冲池。</li>
+</ol>
+<p>在游戏场景结束，切换场景的时候，调用cc.pool.drainAllPools()清空对象缓存池。</p>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> SupportPoolHero = cc.Sprite.extend(&#123;</span><br><span class="line">    _hp : <span class="number">0</span>,    <span class="comment">// 血量</span></span><br><span class="line">    _sp : <span class="number">0</span>,    <span class="comment">// 愤怒</span></span><br><span class="line">    _mp : <span class="number">0</span>,    <span class="comment">// 魔法</span></span><br><span class="line">    ctor: <span class="function"><span class="keyword">function</span> (<span class="params">hp, mp, sp</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>._super(res.sh_node_64_png);</span><br><span class="line">        <span class="keyword">this</span>.initData(hp, mp, sp);</span><br><span class="line">    &#125;,</span><br><span class="line">    initData: <span class="function"><span class="keyword">function</span> (<span class="params">hp, mp, sp</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>._hp, <span class="keyword">this</span>._mp, <span class="keyword">this</span>._sp = hp, mp, sp;</span><br><span class="line">    &#125;,</span><br><span class="line">    unuse: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>._hp = <span class="keyword">this</span>._mp = <span class="keyword">this</span>._sp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>.retain(); <span class="comment">// 使其引用计数+1，防止被内存回收</span></span><br><span class="line">        <span class="keyword">this</span>.removeFromParent();</span><br><span class="line">    &#125;,</span><br><span class="line">    reuse: <span class="function"><span class="keyword">function</span> (<span class="params">hp, mp, sp</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.initData(hp, mp, sp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">SupportPoolHero.create = <span class="function"><span class="keyword">function</span> (<span class="params">hp, mp, sp</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SupportPoolHero(hp, mp, sp)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">SupportPoolHero.reCreate = <span class="function"><span class="keyword">function</span> (<span class="params">hp, mp, sp</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 判断[对象缓冲池中是否有可用对象]</span></span><br><span class="line">    <span class="keyword">if</span> (cc.pool.hasObject(SupportPoolHero))&#123;</span><br><span class="line">        <span class="comment">// 从对象缓冲池中获取对象</span></span><br><span class="line">        <span class="keyword">return</span> cc.pool.getFromPool(SupportPoolHero, hp, mp, sp);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个新的对象</span></span><br><span class="line">        <span class="keyword">return</span>  SupportPoolHero.create(hp, mp, sp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> CCPoolLayer = cc.Layer.extend(&#123;</span><br><span class="line">    createCount         : <span class="number">3000</span>,</span><br><span class="line">    createHeroList      : [],</span><br><span class="line">    reCreateHeroList    : [],</span><br><span class="line">    timeList            : &#123;&#125;,</span><br><span class="line">    ctor : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>._super();</span><br><span class="line">        <span class="comment">// 加载[菜单]_2种方式创建对象</span></span><br><span class="line">        <span class="keyword">this</span>.loadMenu();</span><br><span class="line">        <span class="comment">// 加载[标签]_加载时间反馈</span></span><br><span class="line">        <span class="keyword">this</span>.loadLabelInfo();</span><br><span class="line">        <span class="comment">// 为pool准备对象</span></span><br><span class="line">        <span class="keyword">this</span>.prepareHeroForPool();</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 加载[菜单]_2种方式创建对象</span></span><br><span class="line">    loadMenu : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 创建[标签]_按钮文本说明</span></span><br><span class="line">        <span class="keyword">var</span> labCreate = <span class="keyword">new</span> cc.LabelTTF(<span class="string">"直接创建"</span> + <span class="keyword">this</span>.createCount + <span class="string">"个精灵！"</span>, <span class="string">"Arial"</span>, <span class="number">24</span>);</span><br><span class="line">        <span class="keyword">var</span> labReCreate = <span class="keyword">new</span> cc.LabelTTF(<span class="string">"使用pool创建"</span> + <span class="keyword">this</span>.createCount + <span class="string">"个精灵！"</span>, <span class="string">"Arial"</span>, <span class="number">24</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建[菜单项]</span></span><br><span class="line">        <span class="keyword">var</span> itemCreate = <span class="keyword">new</span> cc.MenuItemLabel(labCreate, <span class="keyword">this</span>.addSpriteByCreate, <span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">var</span> itemReCreate = <span class="keyword">new</span> cc.MenuItemLabel(labReCreate, <span class="keyword">this</span>.addHeorByPool, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建[菜单]</span></span><br><span class="line">        <span class="keyword">var</span> menu = <span class="keyword">new</span> cc.Menu(itemCreate, itemReCreate);</span><br><span class="line">        menu.alignItemsHorizontallyWithPadding(<span class="number">150</span>);</span><br><span class="line">        <span class="keyword">this</span>.addChild(menu);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 加载[标签]_加载时间反馈</span></span><br><span class="line">    loadLabelInfo : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 创建[标签]</span></span><br><span class="line">        <span class="keyword">this</span>.labDirect = <span class="keyword">new</span> cc.LabelTTF(<span class="string">"直接创建耗费:"</span>, <span class="string">"Arial"</span>, <span class="number">18</span>);</span><br><span class="line">        <span class="keyword">this</span>.labDirect.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(<span class="number">-230</span>, <span class="number">-65</span>)));</span><br><span class="line">        <span class="keyword">this</span>.labDirect.anchorY = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>.addChild(<span class="keyword">this</span>.labDirect);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建[标签]</span></span><br><span class="line">        <span class="keyword">this</span>.poolLabel = <span class="keyword">new</span> cc.LabelTTF(<span class="string">"使用pool创建耗费:"</span>, <span class="string">"Arial"</span>, <span class="number">18</span>);</span><br><span class="line">        <span class="keyword">this</span>.poolLabel.setPosition(cc.pAdd(cc.visibleRect.center, cc.p(<span class="number">200</span>, <span class="number">-65</span>)));</span><br><span class="line">        <span class="keyword">this</span>.poolLabel.anchorY = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">this</span>.addChild(<span class="keyword">this</span>.poolLabel);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 准备工作[创建好对象，并把他们放入对象缓冲池]</span></span><br><span class="line">    prepareHeroForPool : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.createCount; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> node = SupportPoolHero.create(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">this</span>.addChild(node);</span><br><span class="line">            cc.pool.putInPool(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 添加[精灵]_直接生成</span></span><br><span class="line">    addSpriteByCreate: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.createHeroList = [];</span><br><span class="line">        <span class="keyword">this</span>.timeStart(<span class="string">"directly"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.createCount; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> node = SupportPoolHero.create(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">            <span class="keyword">this</span>.createHeroList.push(node);</span><br><span class="line">            <span class="keyword">this</span>.addChild(node);</span><br><span class="line">            node.setPosition(<span class="number">10</span> * i, cc.visibleRect.height * <span class="number">0.8</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.setDirectLabel(<span class="keyword">this</span>.timeEnd(<span class="string">"directly"</span>));</span><br><span class="line">        <span class="keyword">this</span>.scheduleOnce(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.createHeroList.length; i++) &#123;</span><br><span class="line">                <span class="keyword">this</span>.createHeroList[i].removeFromParent(<span class="literal">true</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.createHeroList = [];</span><br><span class="line">        &#125;, <span class="number">0.5</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 从pool中获取英雄</span></span><br><span class="line">    addHeorByPool: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.reCreateHeroList = [];</span><br><span class="line">        <span class="keyword">this</span>.timeStart(<span class="string">"use Pool"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.createCount; i++) &#123;</span><br><span class="line">            <span class="keyword">var</span> node = SupportPoolHero.reCreate(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>);</span><br><span class="line">            <span class="keyword">this</span>.reCreateHeroList.push(node);</span><br><span class="line">            <span class="keyword">this</span>.addChild(node);</span><br><span class="line">            node.setPosition(<span class="number">10</span> * i, cc.visibleRect.height * <span class="number">0.8</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.setPoolLabel(<span class="keyword">this</span>.timeEnd(<span class="string">"use Pool"</span>));</span><br><span class="line">        <span class="keyword">this</span>.scheduleOnce(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.reCreateHeroList.length; i++) &#123;</span><br><span class="line">                cc.pool.putInPool(<span class="keyword">this</span>.reCreateHeroList[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.reCreateHeroList = [];</span><br><span class="line">        &#125;, <span class="number">0.5</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    timeStart: <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.timeList[name] = &#123;<span class="attr">startTime</span>: <span class="built_in">Date</span>.now(), <span class="attr">EndTime</span>: <span class="number">0</span>, <span class="attr">DeltaTime</span>: <span class="number">0</span>&#125;;</span><br><span class="line">    &#125;,</span><br><span class="line">    timeEnd: <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> obj = <span class="keyword">this</span>.timeList[name];</span><br><span class="line">        obj.EndTime = <span class="built_in">Date</span>.now();</span><br><span class="line">        obj.DeltaTime = obj.EndTime - obj.startTime;</span><br><span class="line">        <span class="keyword">return</span> obj.DeltaTime;</span><br><span class="line">    &#125;,</span><br><span class="line">    setDirectLabel: <span class="function"><span class="keyword">function</span> (<span class="params">time</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (time == <span class="number">0</span>) &#123;</span><br><span class="line">            time = <span class="string">"&lt;1"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.labDirect.setString(<span class="string">"直接创建耗费:"</span> + time + <span class="string">"ms"</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    setPoolLabel: <span class="function"><span class="keyword">function</span> (<span class="params">time</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (time == <span class="number">0</span>) &#123;</span><br><span class="line">            time = <span class="string">"&lt;1"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.poolLabel.setString(<span class="string">"使用pool创建耗费::"</span> + time + <span class="string">"ms"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="批量渲染"><a href="#批量渲染" class="headerlink" title="批量渲染"></a>批量渲染</h2><p>一般情况下，将图片按照模块分类，用TexturePacker合成大图，这样合理的管理了图片资源，也更贴近引擎的渲染优化。</p>
+<h2 id="cocos2d-x的自动批渲染"><a href="#cocos2d-x的自动批渲染" class="headerlink" title="cocos2d-x的自动批渲染"></a>cocos2d-x的自动批渲染</h2><p>见cocos2d-x绘制系统的博文，自动批绘制需要相关的绘制命令在执行顺序上相邻</p>
+<p>##SpriteBatchNode技术</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>批处理绘制精灵，创建一张纹理，然后将多个精灵添加到此纹理中，绘制时直接绘制该纹理，无需单独绘制子节点。因为在Web上，优先采用WebGL渲染，若不支持WebGL，则采用Canvas绘制。只在WebGL情况下有效</p>
+<p>渲染每个精灵的过程都会经历“打开-绘制-关闭”的流程，使用SpriteBatchNode的时候只用打开关闭一次。</p>
+<p>###源码</p>
+<p>需要再看</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>将纹理加载到内存。</p>
+<p>创建SpriteBatchNode。</p>
+<p>创建精灵并将其添加到SpriteBatchNode。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> BatchNodeLayer = cc.Layer.extend(&#123;</span><br><span class="line">    batchNode : <span class="literal">null</span>,</span><br><span class="line">    ctor : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>._super();</span><br><span class="line">        <span class="comment">// 第一步：加载[资源]</span></span><br><span class="line">        <span class="keyword">this</span>.loadResource();</span><br><span class="line">        <span class="comment">// 第二步：加载[BatchNode]</span></span><br><span class="line">        <span class="keyword">this</span>.loadBatchNode();</span><br><span class="line">        <span class="comment">// 第三步：加载[8000个精灵]</span></span><br><span class="line">        <span class="keyword">this</span>.loadSomePrince();</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 加载[资源]</span></span><br><span class="line">    loadResource : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        cc.textureCache.addImage(res.u13_prince_png);</span><br><span class="line">        cc.spriteFrameCache.addSpriteFrames(res.u13_prince_plist);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 加载[SpriteBatchNode]</span></span><br><span class="line">    loadBatchNode : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.batchNode = <span class="keyword">new</span> cc.SpriteBatchNode(res.u13_prince_png);</span><br><span class="line">        <span class="keyword">this</span>.addChild(<span class="keyword">this</span>.batchNode);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 加载[8000个精灵]_并将其添加到this.batchNode中</span></span><br><span class="line">    loadSomePrince : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> node = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">var</span> pos = cc.p(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">8000</span>; i++) &#123;    <span class="comment">// 创建8000个精灵</span></span><br><span class="line">            node = <span class="keyword">new</span> cc.Sprite(<span class="string">"#prince_stand_1.png"</span>);</span><br><span class="line">            <span class="comment">//this.batchNode.addChild(node);  // 添加到batchNode对象中</span></span><br><span class="line">            <span class="keyword">this</span>.addChild(node);</span><br><span class="line"></span><br><span class="line">            pos.x = <span class="built_in">Math</span>.random() * cc.visibleRect.width;</span><br><span class="line">            pos.y = <span class="built_in">Math</span>.random() * cc.visibleRect.height;</span><br><span class="line">            node.setPosition(pos);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="烘焙层"><a href="#烘焙层" class="headerlink" title="烘焙层"></a>烘焙层</h2><p>对于一些很少发生例如添加删除运行动作的变动的层，我们可以使用图层预烘焙技术。</p>
+<p>cc.Layer的bake函数，一个调用了bake函数的层会将其自身以及所有子节点烘焙到一张画布（canvas）上，只要自身以及所有子节点不发生例如添加或者删除子节点以及运行动作等变动行为，那么在下一帧绘制时，引擎会将预烘焙到画布上的内容直接绘制出来。使得原本需要调用多次绘制的层，现在只需要绘制一次。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> BakeLayer = cc.Layer.extend(&#123;</span><br><span class="line">    lastPrince : <span class="literal">null</span>,</span><br><span class="line">    ctor : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>._super();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.loadMenu();</span><br><span class="line">        <span class="keyword">this</span>.loadSomePrince();</span><br><span class="line">    &#125;,</span><br><span class="line">    loadMenu : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> itemBake = <span class="keyword">new</span> cc.MenuItemFont(<span class="string">"bake"</span>, <span class="keyword">this</span>.onBake, <span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">var</span> itemUnbake = <span class="keyword">new</span> cc.MenuItemFont(<span class="string">"unbake"</span>, <span class="keyword">this</span>.onUnbake, <span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">var</span> itemRunAction = <span class="keyword">new</span> cc.MenuItemFont(<span class="string">"run action"</span>, <span class="keyword">this</span>.onRunAction, <span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> menu = <span class="keyword">new</span> cc.Menu(itemBake, itemUnbake, itemRunAction);</span><br><span class="line">        <span class="keyword">this</span>.addChild(menu, <span class="number">1</span>);</span><br><span class="line">        menu.alignItemsVertically();</span><br><span class="line">        menu.x = cc.winSize.width - <span class="number">100</span>;</span><br><span class="line">        menu.y = cc.winSize.height - <span class="number">80</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    loadSomePrince : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> node = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">var</span> pos = cc.p(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">8000</span>; i++) &#123;    <span class="comment">// 创建8000个精灵</span></span><br><span class="line">            node = <span class="keyword">new</span> cc.Sprite(<span class="string">"#prince_stand_1.png"</span>);</span><br><span class="line">            <span class="keyword">this</span>.addChild(node);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 属性配置</span></span><br><span class="line">            pos.x = <span class="built_in">Math</span>.random() * cc.winSize.width + <span class="number">150</span>;</span><br><span class="line">            pos.y = <span class="built_in">Math</span>.random() * cc.winSize.height * <span class="number">0.65</span>;</span><br><span class="line">            node.setPosition(pos);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.lastPrince = node;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    onBake : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.bake();</span><br><span class="line">    &#125;,</span><br><span class="line">    onUnbake : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.unbake();</span><br><span class="line">    &#125;,</span><br><span class="line">    onRunAction : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> move = cc.moveBy(<span class="number">2</span>, cc.p(<span class="number">0</span>, <span class="number">-200</span>));</span><br><span class="line">        <span class="comment">//this.runAction(move);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.lastPrince.runAction(move);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>仅在Canvas渲染模式下有效</p>
+<h2 id="图片资源优化"><a href="#图片资源优化" class="headerlink" title="图片资源优化"></a>图片资源优化</h2><p>在OpenGL/WebGL中，纹理的宽度和高度都必须是2的n次幂，超出则向上取最接近的</p>
+<p>使用TP打包</p>
+<p>生成.plist配置文件和一个.png。使用代码</p>
+<p><code>cc.textureCache.addImage(res.xx_png);</code></p>
+<p><code>cc.spriteFrameCache.addSpriteFrames(res.xx_plist);</code></p>
+<p>使用TinyPNG压缩</p>
+<h2 id="精灵的创建方式"><a href="#精灵的创建方式" class="headerlink" title="精灵的创建方式"></a>精灵的创建方式</h2><p>每个精灵一般都关联着一张纹理贴图，Texture2D对象</p>
+<p>1.通过图片资源创建，直接传入图片的路径（不推荐）</p>
+<p>2.通过纹理创建</p>
+<p><code>var textrue = cc.textureCache.addImage(res.xx_png);</code></p>
+<p><code>var node = new Sprite(textrue);</code></p>
+<p>3.精灵表单，先将plist文件和图片加载到内存中，然后再创建</p>
+<p><code>cc.spriteFrameCache.addSpriteFrames(res.xx_plist，res.xx_png);</code></p>
+<p><code>var node = new Sprite(”#prince。png“);</code></p>
+<p>4.创建带颜色的精灵</p>
+<p>如果要纯色块的，setColor和setTextureRect，而不是setContentSize</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/28/Cocos2d-x的优化/" data-id="cjkj0cqpa000r8gv0gucmpcvl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cocos2d-x-优化/">Cocos2d-x 优化</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/30/Cocos2d-x纹理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Cocos2d-x纹理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/07/27/网络-TCP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">网络-TCP</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos-JavaScript/">Cocos JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x/">Cocos2d-x</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x-OpenGL/">Cocos2d-x OpenGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2d-x-优化/">Cocos2d-x 优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cocos2dx-JS/">Cocos2dx-JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-JavaScript忍者秘籍/">JavaScript JavaScript忍者秘籍</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codefights/">codefights</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/程序员面试金典/">程序员面试金典</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Cocos-JavaScript/" style="font-size: 10px;">Cocos JavaScript</a> <a href="/tags/Cocos2d-x/" style="font-size: 10px;">Cocos2d-x</a> <a href="/tags/Cocos2d-x-OpenGL/" style="font-size: 15px;">Cocos2d-x OpenGL</a> <a href="/tags/Cocos2d-x-优化/" style="font-size: 10px;">Cocos2d-x 优化</a> <a href="/tags/Cocos2dx-JS/" style="font-size: 10px;">Cocos2dx-JS</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/JavaScript-JavaScript忍者秘籍/" style="font-size: 10px;">JavaScript JavaScript忍者秘籍</a> <a href="/tags/codefights/" style="font-size: 10px;">codefights</a> <a href="/tags/程序员面试金典/" style="font-size: 10px;">程序员面试金典</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/网络/" style="font-size: 20px;">网络</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/06/ES-1/">ES-1</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/31/Cocos2d-x精灵/">Cocos2d-x精灵</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/30/Cocos2d-x纹理/">Cocos2d-x纹理</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/28/Cocos2d-x的优化/">Cocos2d-x的优化</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/27/网络-TCP/">网络-TCP</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 kjlist<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
